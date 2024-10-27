@@ -1,13 +1,19 @@
-
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Hello Spring Boot</title>
+        <title>Agendamentos</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>
-            <h2>Hello!</h2>
-        </div>
+        <h2>Lista de Agendamentos</h2>
+        <ul>
+            <!-- Itera sobre a lista de agendamentos e exibe os detalhes -->
+            <li th:each="agendamento : ${agendamentos}">
+                <p th:text="'Data: ' + ${agendamento.dia}"></p>
+                <p th:text="'Hora: ' + ${agendamento.hora}"></p>
+<!--                <p th:text="'Cliente: ' + ${agendamento.cliente.nome} + ' ' + ${agendamento.cliente.sobrenome}"></p>-->
+            </li>
+        </ul>
     </body>
 </html>
