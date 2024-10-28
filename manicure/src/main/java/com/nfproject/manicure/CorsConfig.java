@@ -13,7 +13,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Permite todas as rotas
-                        .allowedOrigins("http://localhost:3000") // Altere para a origem que você deseja permitir
+                        .allowedOrigins("*") // Altere para a origem que você deseja permitir
                         .allowedMethods("GET", "POST", "PUT", "DELETE") // Métodos permitidos
                         .allowedHeaders("*")
                         .allowCredentials(true);
