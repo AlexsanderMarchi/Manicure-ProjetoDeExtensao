@@ -20,8 +20,8 @@ public class WebController {
     
     @GetMapping("/agendamentos")
     public List<HoraMarcada> getAgendamentos() {
-        Cliente anaBeatriz = new Cliente("Ana", "Beatriz");
-        Cliente carlaFontes = new Cliente("Carla", "Fontes");
+        Cliente anaBeatriz = new Cliente("Ana", "Beatriz", "48998878787");
+        Cliente carlaFontes = new Cliente("Carla", "Fontes", "48987654321");
         
         HoraMarcada horaAna = new HoraMarcada("11 de Outubro", "11:00", anaBeatriz);
         HoraMarcada horaCarla = new HoraMarcada("10 de Outubro", "12:00", carlaFontes);

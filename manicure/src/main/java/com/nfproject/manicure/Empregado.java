@@ -1,16 +1,17 @@
-
 package com.nfproject.manicure;
 
 
-public class Cliente {
+public class Empregado {
     private String nome;
     private String sobreNome;
     private String telefone;
+    private String cargo;
 
-    public Cliente (String nome, String sobreNome, String telefone){
+    public Empregado (String nome, String sobreNome, String telefone, String cargo){
         setNome(nome);
         setSobreNome(sobreNome);
         setTelefone(telefone);
+        setCargo(cargo);
     }
     
     
@@ -19,11 +20,11 @@ public class Cliente {
     }
 
     public void setNome(String nome) {
-         if(!nome.isBlank()){
-        this.nome = nome;
-         }
+        if(!nome.isBlank()){
+            this.nome = nome;
+        }
     }
-
+    
     public String getSobreNome() {
         return sobreNome;
     }
@@ -33,7 +34,17 @@ public class Cliente {
         this.sobreNome = sobreNome;
         }
     }
-    
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        if(!cargo.isBlank()){
+            this.cargo = cargo;
+        }
+    }
+
     public String getTelefone() {
         return telefone;
     }
@@ -46,13 +57,13 @@ public class Cliente {
     
     @Override
     public String toString(){
-        String cliente = """
-                     Cliente: %s %s
+        String empregado = """
+                     Empregado: %s $s
                      Contato: %s
+                     Cargo: %s
                      """;
-        String clientesFormatados = String.format(cliente, nome, sobreNome, telefone);
+        String empregadoFormatados = String.format(empregado, nome, sobreNome, telefone, cargo);
         
-        return clientesFormatados;
+        return empregadoFormatados;
     }
-    
 }
