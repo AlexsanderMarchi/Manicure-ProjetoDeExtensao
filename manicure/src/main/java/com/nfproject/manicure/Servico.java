@@ -36,9 +36,9 @@ public class Servico {
                      Serviço: %s %s
                      Preço: %.2f
                      """;
-        String servicoFormatados = String.format(servico, nome, preco);
+        String servicosFormatados = String.format(servico, nome, preco);
         
-        return servicoFormatados;
+        return servicosFormatados;
     }
     
 }

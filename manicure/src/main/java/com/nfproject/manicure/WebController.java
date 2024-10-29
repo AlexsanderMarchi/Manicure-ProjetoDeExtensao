@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RestController
 public class WebController {
     
+    private List<HoraMarcada> agendamentoGerais = new ArrayList<>();
     
     @GetMapping("/agendamentos")
     public List<HoraMarcada> getAgendamentos() {
@@ -26,7 +27,6 @@ public class WebController {
         HoraMarcada horaAna = new HoraMarcada("11 de Outubro", "11:00", anaBeatriz);
         HoraMarcada horaCarla = new HoraMarcada("10 de Outubro", "12:00", carlaFontes);
         
-        List<HoraMarcada> agendamentoGerais = new ArrayList<>();
         agendamentoGerais.add(horaAna);
         agendamentoGerais.add(horaCarla);
         
@@ -35,27 +35,27 @@ public class WebController {
     
      @PostMapping("/agendamentos")
     public HoraMarcada createAgendamento(@RequestBody HoraMarcada novoAgendamento) {
-//        agendamentoGerais.add(novoAgendamento);
+        agendamentoGerais.add(novoAgendamento);
         return novoAgendamento;
     }
     
     @PutMapping("/agendamentos/{index}")
     public HoraMarcada updateAgendamento(@PathVariable int index, @RequestBody HoraMarcada agendamentoAtualizado) {
-//        if (index >= 0 && index < agendamentoGerais.size()) {
-//            agendamentoGerais.set(index, agendamentoAtualizado);
+        if (index >= 0 && index < agendamentoGerais.size()) {
+            agendamentoGerais.set(index, agendamentoAtualizado);
             return agendamentoAtualizado;
-//        } else {
-//            throw new IllegalArgumentException("Índice inválido");
-//        }
+        } else {
+            throw new IllegalArgumentException("Índice inválido");
+        }
     }
 
     @DeleteMapping("/agendamentos/{index}")
     public String deleteAgendamento(@PathVariable int index) {
-//        if (index >= 0 && index < agendamentoGerais.size()) {
-//            agendamentoGerais.remove(index);
+        if (index >= 0 && index < agendamentoGerais.size()) {
+            agendamentoGerais.remove(index);
             return "Agendamento removido com sucesso!";
-//        } else {
-//            throw new IllegalArgumentException("Índice inválido");
-//        }
+        } else {
+            throw new IllegalArgumentException("Índice inválido");
+        }
     }
 }
