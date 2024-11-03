@@ -87,15 +87,15 @@ async function fetchAgendamentos() {
     }
   }
 
-  async function fetchTotalProdutos() {
+  async function fetchTotalProdutosEstoque() {
     try {
-      const response = await fetch('https://manicure-projetodeextensao.onrender.com/produtos/total');
+      const response = await fetch('https://manicure-projetodeextensao.onrender.com/produtos/total-estoque');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      const totalProdutos = await data;
-      document.getElementById('totalProdutos').textContent = totalProdutos;
+      const totalProdutosEstoque = await data;
+      document.getElementById('totalProdutosEstoque').textContent = totalProdutosEstoque;
     } catch (error) {
       console.error('Fetch error:', error);
     }
@@ -170,6 +170,6 @@ async function fetchAgendamentos() {
     await fetchAgendamentos();
     await fetchEmpregados();
     await fetchTotalClientes();
-    await fetchTotalProdutos();
+    await fetchTotalProdutosEstoque();
     await fetchTotalAgendamentos();
 };

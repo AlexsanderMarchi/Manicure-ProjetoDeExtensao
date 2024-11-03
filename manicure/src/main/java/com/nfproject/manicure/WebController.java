@@ -20,6 +20,7 @@ public class WebController {
     private final List<HoraMarcada> agendamentoGerais = new ArrayList<>();
     private final List<Cliente> clientes = new ArrayList<>();
     private final List<Produtos> produtos = new ArrayList<>();
+    private final List<Produtos> produtosEstoque = new ArrayList<>();
     private final List<Empregado> empregados = new ArrayList<>();
     
     public WebController() {
@@ -38,11 +39,21 @@ public class WebController {
         Produtos acetona = new Produtos("Acetona", 25.90, 10);
         Produtos alicate = new Produtos("Alicate", 70.90, 100);
         Produtos tesoura = new Produtos("Tesoura", 30.79, 24);
+        Produtos alicateGrande = new Produtos("Alicate grande", 70.25, 0);
+        Produtos algodao = new Produtos("Algodão", 5.25, 0);
         produtos.add(esmalte);
         produtos.add(acetona);
         produtos.add(alicate);
         produtos.add(tesoura);
-
+        produtos.add(alicateGrande);
+        produtos.add(algodao);
+    
+        for (Produtos produto : produtos) {
+            if (produto.getQtd_estoque() > 0) {
+                produtosEstoque.add(produto);
+            }
+        }
+        
         // Inicializando Agendamentos
         HoraMarcada horaAna = new HoraMarcada("11 de Outubro", "11:00", anaBeatriz);
         HoraMarcada horaCarla = new HoraMarcada("10 de Outubro", "12:00", carlaFontes);
@@ -77,18 +88,18 @@ public class WebController {
         return clientes.size();
     }
     
-    @GetMapping("/produtos/total")
-    public int getTotalProdutos() {
-        return produtos.size();
+    @GetMapping("/produtos/total-estoque")
+    public int getTotalProdutosEstoque() {
+           return produtosEstoque.size();
     }
     
     //----------------------------------------------------------------------------------
     //Crud Clientes
     
-//    @GetMapping("/clientes");;
-//    public List<Cliente> getClientes() {
-//        return clientes;
-//    }
+    @GetMapping("/clientes")
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
 //    
 //    @PostMapping("/clientes")
 //    public Cliente createCliente(@RequestBody Cliente novoCliente) {
@@ -119,10 +130,10 @@ public class WebController {
     //----------------------------------------------------------------------------------
     //Crud Produtos
     
-//    @GetMapping("/produtos")
-//    public List<Produtos> getProdutos() {
-//        return produtos;
-//    }
+    @GetMapping("/produtos")
+    public List<Produtos> getProdutos() {
+        return produtos;
+    }
 //    
 //    @PostMapping("/produtos")
 //    public Produtos createProduto(@RequestBody Produtos novoProduto) {
