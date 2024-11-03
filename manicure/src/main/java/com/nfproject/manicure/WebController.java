@@ -20,6 +20,7 @@ public class WebController {
     private final List<HoraMarcada> agendamentoGerais = new ArrayList<>();
     private final List<Cliente> clientes = new ArrayList<>();
     private final List<Produtos> produtos = new ArrayList<>();
+    private final List<Empregado> empregados = new ArrayList<>();
     
     public WebController() {
         // Inicializando Clientes
@@ -47,6 +48,10 @@ public class WebController {
         HoraMarcada horaCarla = new HoraMarcada("10 de Outubro", "12:00", carlaFontes);
         agendamentoGerais.add(horaAna);
         agendamentoGerais.add(horaCarla);
+        
+        // Inicializando Empregados
+        Empregado ramonaFlowers = new Empregado("Ramona", "Flowers", "48967854820", "Manicure");
+        empregados.add(ramonaFlowers);
     }
     
     //----------------------------------------------------------------------------------
@@ -55,6 +60,11 @@ public class WebController {
     @GetMapping("/agendamentos")
     public List<HoraMarcada> getAgendamentos() {
         return agendamentoGerais;
+    }
+    
+    @GetMapping("/empregados")
+    public List<Empregado> getEmpregados() {
+        return empregados;
     }
     
     @GetMapping("/agendamentos/total")
