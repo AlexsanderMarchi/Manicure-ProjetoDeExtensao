@@ -39,15 +39,55 @@
 //     fetchData();
 // });
 
-async function fetchServices() {
+async function fetchAgendamentos() {
     try {
-      const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos'); // Substitua pela URL real da API
+      const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
       populateTable(data);
-      const totalAgendamentos = data.length; // Conta a quantidade de agendamentos
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  }
+
+  async function fetchTotalClientes() {
+    try {
+      const response = await fetch('https://manicure-projetodeextensao.onrender.com/clientes/total');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      const totalClientes = await data;
+      document.getElementById('totalClientes').textContent = totalClientes;
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  }
+
+  async function fetchTotalProdutos() {
+    try {
+      const response = await fetch('https://manicure-projetodeextensao.onrender.com/produtos/total');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      const totalProdutos = await data;
+      document.getElementById('totalProdutos').textContent = totalProdutos;
+    } catch (error) {
+      console.error('Fetch error:', error);
+    }
+  }
+
+  async function fetchTotalAgendamentos() {
+    try {
+      const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos/total');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      const totalAgendamentos = await data;
       document.getElementById('totalAgendamentos').textContent = totalAgendamentos;
     } catch (error) {
       console.error('Fetch error:', error);
@@ -57,7 +97,7 @@ async function fetchServices() {
   // Função para popular a tabela
   function populateTable(services) {
     const tableBody = document.getElementById("tableBody");
-    tableBody.innerHTML = ''; // Limpa o conteúdo anterior
+    tableBody.innerHTML = '';
 
     services.forEach(service => {
       const row = document.createElement("tr");
@@ -75,5 +115,9 @@ async function fetchServices() {
     });
   }
 
-  // Chama a função para buscar os dados quando a página carregar
-  window.onload = fetchServices;
+  window.onload = async () => {
+    await fetchAgendamentos();
+    await fetchTotalClientes();
+    await fetchTotalProdutos();
+    await fetchTotalAgendamentos();
+};
