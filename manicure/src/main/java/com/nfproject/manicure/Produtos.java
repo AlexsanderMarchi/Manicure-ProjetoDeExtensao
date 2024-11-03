@@ -5,6 +5,12 @@ public class Produtos {
     private double preco;
     private int qtd_estoque;
 
+    public Produtos (String nome, double preco, int qtd_estoque){
+        setNome(nome);
+        setPreco(preco);
+        setQtd_estoque(qtd_estoque);
+    }
+    
     public String getNome() {
         return nome;
     }
