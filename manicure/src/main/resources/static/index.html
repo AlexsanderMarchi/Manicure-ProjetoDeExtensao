@@ -9,22 +9,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/agendamentos')
-                .then(response => response.json())
-                .then(data => {
-                     // Cria um elemento para exibir o JSON
-                    const jsonDisplay = document.getElementById('json-display');
-                    jsonDisplay.textContent = JSON.stringify(data, null, 2); // Formata o JSON
-                    console.log(data); // Exibe os agendamentos no console do navegador
-                })
-                .catch(error => console.error('Erro:', error));
-        });
         </script>
     </head>
     <body>
         <div>
-            <pre id="json-display"></pre>
+            <h1>Servidor Rodando...</h1>
         </div>
     </body>
 </html>
