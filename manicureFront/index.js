@@ -134,7 +134,7 @@ async function fetchAgendamentos() {
   }
 
   function populateDivs(empregados) {
-    const cardBody = document.querySelector('.card-body'); // Seleciona a div onde os empregados serão adicionados
+    const cardBody = document.querySelector('.empregados_container'); // Seleciona a div onde os empregados serão adicionados
     cardBody.innerHTML = ''; // Limpa a div antes de adicionar novos dados
 
     empregados.forEach(empregado => {
