@@ -120,6 +120,7 @@ async function fetchAgendamentos() {
     const tableBody = document.getElementById("tableBody");
     tableBody.innerHTML = '';
 
+    
     services.forEach(service => {
       const row = document.createElement("tr");
 
