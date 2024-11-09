@@ -1,0 +1,88 @@
+CREATE TABLE Cliente (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Sobrenome VARCHAR(100) NOT NULL,
+    Telefone INT NOT NULL
+);
+
+CREATE TABLE Empregada (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Telefone VARCHAR(15),
+    Cargo VARCHAR(50)
+);
+
+CREATE TABLE Servicos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Preco DECIMAL(10, 2) NOT NULL
+);
+
+CREATE TABLE Produtos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(100) NOT NULL,
+    Preco DECIMAL(10, 2) NOT NULL,
+    Qtd_Estoque INT NOT NULL
+);
+
+CREATE TABLE HoraMarcada (
+    ID_HoraMarcada INT AUTO_INCREMENT PRIMARY KEY,
+    Dt_Marcada DATE NOT NULL,
+    Hora TIME NOT NULL,
+    ID_Cliente INT,
+    ID_Empregada INT,
+    ID_Servico INT,
+    FOREIGN KEY (ID_Cliente) REFERENCES Cliente(id),
+    FOREIGN KEY (ID_Empregada) REFERENCES Empregada(id),
+    FOREIGN KEY (ID_Servico) REFERENCES Servicos(id)
+);
+
+CREATE TABLE Caixa (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Tipo ENUM('Entrada', 'Saída') NOT NULL,
+    Valor DECIMAL(10, 2) NOT NULL,
+    Dt_caixa DATETIME NOT NULL,
+    ID_Empregada INT,
+    ID_Servico INT NULL,
+    ID_Produto INT NULL,
+    FOREIGN KEY (ID_Empregada) REFERENCES Empregada(id),
+    FOREIGN KEY (ID_Servico) REFERENCES Servicos(id),
+    FOREIGN KEY (ID_Produto) REFERENCES Produtos(id),
+    CHECK (ID_Servico IS NOT NULL OR ID_Produto IS NOT NULL) -- Garante que pelo menos um esteja preenchido
+);
+
+CREATE USER 'Admin' IDENTIFIED BY 'manicuredatabase2024';
+GRANT ALL PRIVILEGES ON nome_do_banco.* TO 'Admin';
+FLUSH PRIVILEGES;
+
+
+INSERT INTO Cliente (Nome, Sobrenome, Telefone) VALUES
+('Renata', 'Silva', 123456789),
+('Carlos', 'Oliveira', 321654987);
+
+INSERT INTO Empregada (Nome, Telefone, Cargo) VALUES
+('Maria', '123456789', 'Manicure'),
+('João', '987654321', 'Cabeleireiro');
+
+INSERT INTO Servicos (Nome, Preco) VALUES
+('Corte de Cabelo', 50.00),
+('Manicure', 25.00);
+
+INSERT INTO Produtos (Nome, Preco, Qtd_Estoque) VALUES
+('Esmalte Vermelho', 15.00, 100),
+('Creme Hidratante', 30.00, 50);
+
+INSERT INTO HoraMarcada (Dt_Marcada, Hora, ID_Cliente, ID_Empregada, ID_Servico) VALUES
+('2024-10-15', '09:00:00', 1, 1, 2),
+('2024-10-16', '10:30:00', 2, 2, 1);
+
+INSERT INTO Caixa (Tipo, Valor, Dt_caixa, ID_Empregada, ID_Servico, ID_Produto) VALUES
+('Entrada', 25.00, '2024-10-15 09:30:00', 1, 2, NULL),
+('Saída', 15.00, '2024-10-15 10:00:00', 2, NULL, 1);
+
+
+SELECT * FROM Servicos;
+
+DELETE FROM Cliente WHERE Nome = 'João';
+
+drop table Cliente;
