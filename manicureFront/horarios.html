@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+        <title>Horarios</title>
+        <link rel="stylesheet" href="horarios.css">
+    </head>
+    <body>
+        <input type="checkbox" id="nav-toggle">
+        <div class="sidebar">
+            <div class="sidebar-brand">
+                <h2><span class=""><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1.2em" viewBox="0 0 50 50">
+                    <path fill="currentColor" d="M34.781 6.664H27.83c-1.256.004-1.209 1.876 0 1.865h6.951v.957H27.83c-1.249-.011-1.203 1.86 0 1.865h6.951v.978H27.83c-1.249 0-1.203 1.87 0 1.865h6.951v.932H27.83c-1.223.009-1.203 1.881 0 1.887h6.951v.934H27.83c-1.223-.004-1.228 1.865 0 1.865h6.951v.932H27.83c-1.223.004-1.228 1.875 0 1.866h6.951v.955H27.83c-1.223-.011-1.228 1.858 0 1.865h6.951v.93H27.83c-1.223-.001-1.203 1.872 0 1.866h6.951v18.159c.004 2.767 4.207 2.717 4.219 0V3.89c-.012-1.264-1.05-2.862-2.758-2.867H27.83c-1.256.001-1.209 1.873 0 1.865l6.951.023v.93H27.83c-1.254-.006-1.207 1.865 0 1.866h6.951zm-7.429 32.194C27.348 35.628 24 32.154 20 34.404V22.05L17.413 1.675c-.054-.539-.511-.666-.818-.675c-.317.009-.952.136-1.021.675L13 22.05v12.354c-4-2.25-7.24 1.246-7.241 4.429c.001 2.832 2.181 5.158 5.131 5.151c2.972.007 5.11-2.6 5.11-5.151V26h1v12.833c0 2.856 2.212 4.97 4.67 5.104c-.041 1.566.47 3.8 1.432 4.686c1.128 1.04 2.471-.29 1.92-1.373c-.532-1.008-1.054-1.605-.63-3.806c1.772-.82 2.956-2.546 2.96-4.586m-16.348 2.541a2.542 2.542 0 0 1 0-5.085c1.386.008 2.515 1.145 2.525 2.544a2.55 2.55 0 0 1-2.525 2.541m8.571-2.541a2.553 2.553 0 0 1 2.526-2.544a2.55 2.55 0 0 1 2.525 2.544a2.545 2.545 0 0 1-2.525 2.541a2.55 2.55 0 0 1-2.526-2.541" />
+                </svg></span> <span>Manicure</span></h2>
+            </div>
+
+            <div class="sidebar-menu">
+                <ul>
+                    <li>
+                        <a href="index.html" class="tab-buttons tab-hover"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                                <path class="Home" fill="currentColor" d="M20.25 10a1.25 1.25 0 1 0-2.5 0zm-14 0a1.25 1.25 0 1 0-2.5 0zm13.866 2.884a1.25 1.25 0 0 0 1.768-1.768zM12 3l.884-.884a1.25 1.25 0 0 0-1.768 0zm-9.884 8.116a1.25 1.25 0 0 0 1.768 1.768zM7 22.25h10v-2.5H7zM20.25 19v-9h-2.5v9zm-14 0v-9h-2.5v9zm15.634-7.884l-9-9l-1.768 1.768l9 9zm-10.768-9l-9 9l1.768 1.768l9-9zM17 22.25A3.25 3.25 0 0 0 20.25 19h-2.5a.75.75 0 0 1-.75.75zm-10-2.5a.75.75 0 0 1-.75-.75h-2.5A3.25 3.25 0 0 0 7 22.25z" />
+                            </svg>
+                            <span>Página Inicial</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="tab-buttons tab-hover"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 36 36">
+                            <path fill="currentColor" d="M24.89 26h7.86c-.66-8.71-4.41-14.12-9.22-17.32l2.19-4.78a1 1 0 0 0-.91-1.4H11.1a1 1 0 0 0-.91 1.4l1.2 2.6h10.12l-.9 2h-1.85A25 25 0 0 1 20 13.19a25 25 0 0 1 .32 3l-1.58 1.11a22.5 22.5 0 0 0-.32-3.86A21.7 21.7 0 0 0 17 8.5h-1a28 28 0 0 0-2.48 3.7a24 24 0 0 0-1.49 3.46l-1.37-.91a23 23 0 0 1 1.47-3.34a31 31 0 0 1 1.92-2.91H12.3l.08.17c-5.3 3.53-9.33 9.73-9.33 20.08a1.65 1.65 0 0 0 1.56 1.75h8a2.67 2.67 0 0 1 1.6-4.5a2.67 2.67 0 0 1-.37-1.34a2.7 2.7 0 0 1 2.7-2.7h6a2.7 2.7 0 0 1 2.7 2.7a2.63 2.63 0 0 1-.35 1.34" class="clr-i-solid clr-i-solid-path-1" />
+                            <path fill="currentColor" d="M21.6 28.5a1 1 0 0 0-1-1h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 1-1" class="clr-i-solid clr-i-solid-path-2" />
+                            <path fill="currentColor" d="M22.54 23.5h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2" class="clr-i-solid clr-i-solid-path-3" />
+                            <path fill="currentColor" d="M22 31.5h-6a1 1 0 0 0 0 2h6a1 1 0 0 0 0-2" class="clr-i-solid clr-i-solid-path-4" />
+                            <path fill="currentColor" d="M32.7 31.5h-7a1 1 0 0 0 0 2h7a1 1 0 0 0 0-2" class="clr-i-solid clr-i-solid-path-5" />
+                            <path fill="currentColor" d="M33.7 27.5h-7a1 1 0 0 0 0 2h7a1 1 0 0 0 0-2" class="clr-i-solid clr-i-solid-path-6" />
+                            <path fill="none" d="M0 0h36v36H0z" />
+                        </svg>
+                        <span>Financeiro</span></a>
+                    </li>
+                    <li>
+                        <a href="clientes.html" class="tab-buttons tab-hover"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 20 20">
+                                <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
+                                    <path d="M5 9a2 2 0 1 0 0-4a2 2 0 0 0 0 4m0 1a3 3 0 1 0 0-6a3 3 0 0 0 0 6" />
+                                    <path d="M3.854 8.896a.5.5 0 0 1 0 .708l-.338.337A3.47 3.47 0 0 0 2.5 12.394v1.856a.5.5 0 1 1-1 0v-1.856a4.47 4.47 0 0 1 1.309-3.16l.337-.338a.5.5 0 0 1 .708 0m11.792-.3a.5.5 0 0 0 0 .708l.338.337A3.47 3.47 0 0 1 17 12.094v2.156a.5.5 0 0 0 1 0v-2.156a4.47 4.47 0 0 0-1.309-3.16l-.337-.338a.5.5 0 0 0-.708 0" />
+                                    <path d="M14 9a2 2 0 1 1 0-4a2 2 0 0 1 0 4m0 1a3 3 0 1 1 0-6a3 3 0 0 1 0 6m-4.5 3.25a2.5 2.5 0 0 0-2.5 2.5v1.3a.5.5 0 0 1-1 0v-1.3a3.5 3.5 0 0 1 7 0v1.3a.5.5 0 1 1-1 0v-1.3a2.5 2.5 0 0 0-2.5-2.5" />
+                                    <path d="M9.5 11.75a2 2 0 1 0 0-4a2 2 0 0 0 0 4m0 1a3 3 0 1 0 0-6a3 3 0 0 0 0 6" />
+                                </g>
+                            </svg>
+                            <span>Clientes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="tab-buttons tab-hover"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="m14.17 13.71l1.4-2.42c.09-.15.05-.34-.08-.45l-1.48-1.16c.03-.22.05-.45.05-.68s-.02-.46-.05-.69l1.48-1.16c.13-.11.17-.3.08-.45l-1.4-2.42c-.09-.15-.27-.21-.43-.15l-1.74.7c-.36-.28-.75-.51-1.18-.69l-.26-1.85a.364.364 0 0 0-.35-.29h-2.8c-.17 0-.32.13-.35.3L6.8 4.15c-.42.18-.82.41-1.18.69l-1.74-.7c-.16-.06-.34 0-.43.15l-1.4 2.42c-.09.15-.05.34.08.45l1.48 1.16c-.03.22-.05.45-.05.68s.02.46.05.69l-1.48 1.16c-.13.11-.17.3-.08.45l1.4 2.42c.09.15.27.21.43.15l1.74-.7c.36.28.75.51 1.18.69l.26 1.85c.03.16.18.29.35.29h2.8c.17 0 .32-.13.35-.3l.26-1.85c.42-.18.82-.41 1.18-.69l1.74.7c.16.06.34 0 .43-.15M8.81 11c-1.1 0-2-.9-2-2s.9-2 2-2s2 .9 2 2s-.9 2-2 2m13.11 7.67l-.96-.74c.02-.14.04-.29.04-.44s-.01-.3-.04-.44l.95-.74c.08-.07.11-.19.05-.29l-.9-1.55c-.05-.1-.17-.13-.28-.1l-1.11.45c-.23-.18-.48-.33-.76-.44l-.17-1.18a.216.216 0 0 0-.21-.2h-1.79c-.11 0-.21.08-.22.19l-.17 1.18c-.27.12-.53.26-.76.44l-1.11-.45a.23.23 0 0 0-.28.1l-.9 1.55c-.05.1-.04.22.05.29l.95.74a3.2 3.2 0 0 0 0 .88l-.95.74c-.08.07-.11.19-.05.29l.9 1.55c.05.1.17.13.28.1l1.11-.45c.23.18.48.33.76.44l.17 1.18c.02.11.11.19.22.19h1.79c.11 0 .21-.08.22-.19l.17-1.18c.27-.12.53-.26.75-.44l1.12.45c.1.04.22 0 .28-.1l.9-1.55c.06-.09.03-.21-.05-.28m-4.29.16a1.35 1.35 0 1 1 .001-2.701a1.35 1.35 0 0 1-.001 2.701" />
+                        </svg>
+                        <span>Serviços</span></a>
+                    </li>
+                    <li>
+                        <a href="" class="tab-buttons active"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 32 32">
+                            <path fill="currentColor" d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14m0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4" />
+                            <path fill="currentColor" d="M20.59 22L15 16.41V7h2v8.58l5 5.01z" />
+                        </svg>
+                        <span>Horários</span></a>
+                    </li>
+                    <li> 
+                        <a href="" class="tab-buttons tab-hover"><svg xmlns="http:www.w3.org/2000/svg" width="1.2em" height="1.2em"  viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M16 17v2H2v-2s0-4 7-4s7 4 7 4m-3.5-9.5A3.5 3.5 0 1 0 9 11a3.5 3.5 0 0 0 3.5-3.5m3.44 5.5A5.32 5.32 0 0 1 18 17v2h4v-2s0-3.63-6.06-4M15 4a3.4 3.4 0 0 0-1.93.59a5 5 0 0 1 0 5.82A3.4 3.4 0 0 0 15 11a3.5 3.5 0 0 0 0-7" />
+                        </svg>
+                        <span>Empregados</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <header>
+                <h2>
+                    <label for="nav-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="0.8em" height="0.8em" viewBox="0 0 1200 1200">
+                            <path fill="currentColor" d="M0 0v240h1200V0zm0 480v240h1200V480zm0 480v240h1200V960z" />
+                        </svg>
+                    </label>
+
+                    Painel
+                </h2>
+
+                <div class="search-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="m19.485 20.154l-6.262-6.262q-.75.639-1.725.989t-1.96.35q-2.402 0-4.066-1.663T3.808 9.503T5.47 5.436t4.064-1.667t4.068 1.664T15.268 9.5q0 1.042-.369 2.017t-.97 1.668l6.262 6.261zM9.539 14.23q1.99 0 3.36-1.37t1.37-3.361t-1.37-3.36t-3.36-1.37t-3.361 1.37t-1.37 3.36t1.37 3.36t3.36 1.37" />
+                    </svg>
+                    <input type="search" placeholder="Pesquisar" />
+                </div>
+
+                <div class="user-wrapper">
+                    <img src="img2.jpg" width="40px" height="40px" alt="">
+                    <div>
+                        <h4>Maria da Silva</h4>
+                        <small>Administradora</small>
+                    </div>       
+                </header>
+                <div class="Horarios">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Horarios</h3>
+                            <button id="btn-adicionar" class="button">Adicionar Horário</button>
+                            <div id="adicionar-modal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close" data-modal="adicionar-modal">&times;</span>
+                                    <h2>Adicionar Novo Agendamento</h2>
+                                    <form id="adicionar-form">
+                                        <div>
+                                            <label for="nome">Nome:</label>
+                                            <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
+                                        </div>
+                                        <div>
+                                            <label for="horario">Horário:</label>
+                                            <input type="time" id="horario" name="horario" required>
+                                        </div>
+                                        <div>
+                                            <label for="servico">Serviço:</label>
+                                            <select id="servico" name="servico" required>
+                                                <option value="" disabled selected>Selecione um serviço</option>
+                                                <option value="corte">Corte</option>
+                                                <option value="manicure">Manicure</option>
+                                                <option value="pedicure">Pedicure</option>
+                                                <option value="coloração">Coloração</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="profissional">Profissional:</label>
+                                            <input type="text" id="profissional" name="profissional" placeholder="Digite o nome do profissional" required>
+                                        </div>
+                                        <button type="submit">Adicionar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="agenda">
+                            <div class="day">
+                                <h2>Segunda-feira, 6 de Novembro</h2>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 09:00</p>
+                                    <p><strong>Cliente:</strong> Ana Silva</p>
+                                    <p><strong>Serviço:</strong> Cabelo</p>
+                                    <p><strong>Profissional:</strong> Angela</p>
+                                </div>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 11:00</p>
+                                    <p><strong>Cliente:</strong> Maria Souza</p>
+                                    <p><strong>Serviço:</strong> Pedicure</p>
+                                    <p><strong>Profissional:</strong> Rosana</p>
+                                </div>
+                            </div>
+            
+                            <div class="day">
+                                <h2>Terça-feira, 7 de Novembro</h2>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 10:00</p>
+                                    <p><strong>Cliente:</strong> Beatriz Lima</p>
+                                    <p><strong>Serviço:</strong> Pedicure</p>
+                                    <p><strong>Profissional:</strong> Rosana</p>
+                                </div>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 14:00</p>
+                                    <p><strong>Cliente:</strong> Camila Ferreira</p>
+                                    <p><strong>Serviço:</strong> Alongamento de Unhas</p>
+                                    <p><strong>Profissional:</strong> Amabily</p>
+                                </div>
+                            </div>
+            
+                            <div class="day">
+                                <h2>Quarta-feira, 8 de Novembro</h2>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 09:00</p>
+                                    <p><strong>Cliente:</strong> Fernanda Costa</p>
+                                    <p><strong>Serviço:</strong> Pedicure</p>
+                                    <p><strong>Profissional:</strong> Rosana</p>
+                                </div>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 13:00</p>
+                                    <p><strong>Cliente:</strong> Larissa Melo</p>
+                                    <p><strong>Serviço:</strong> Manicure Simples</p>
+                                    <p><strong>Profissional:</strong> Angela</p>
+                                </div>
+                            </div>
+            
+                            <div class="day">
+                                <h2>Quinta-feira, 9 de Novembro</h2>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 08:30</p>
+                                    <p><strong>Cliente:</strong> Joana Silva</p>
+                                    <p><strong>Serviço:</strong> Alongamento de Unhas</p>
+                                    <p><strong>Profissional:</strong> Amabily</p>
+                                </div>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 15:00</p>
+                                    <p><strong>Cliente:</strong> Rita Santos</p>
+                                    <p><strong>Serviço:</strong> Cabelo</p>
+                                    <p><strong>Profissional:</strong> Angela</p>
+                                </div>
+                            </div>
+            
+                            <div class="day">
+                                <h2>Sexta-feira, 10 de Novembro</h2>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 10:00</p>
+                                    <p><strong>Cliente:</strong> Sabrina Souza</p>
+                                    <p><strong>Serviço:</strong> Cabelo</p>
+                                    <p><strong>Profissional:</strong> Angela</p>
+                                </div>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 12:30</p>
+                                    <p><strong>Cliente:</strong> Priscila Andrade</p>
+                                    <p><strong>Serviço:</strong> Pedicure</p>
+                                    <p><strong>Profissional:</strong> Rosana</p>
+                                </div>
+                            </div>
+            
+                            <div class="day">
+                                <h2>Sábado, 11 de Novembro</h2>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 09:00</p>
+                                    <p><strong>Cliente:</strong> Carla Ferreira</p>
+                                    <p><strong>Serviço:</strong> Alongamento de Unhas</p>
+                                    <p><strong>Profissional:</strong> Amabily</p>
+                                </div>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 11:00</p>
+                                    <p><strong>Cliente:</strong> Letícia Lima</p>
+                                    <p><strong>Serviço:</strong> Manicure Simples</p>
+                                    <p><strong>Profissional:</strong> Angela</p>
+                                </div>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 14:30</p>
+                                    <p><strong>Cliente:</strong> Paula Almeida</p>
+                                    <p><strong>Serviço:</strong> Pedicure</p>
+                                    <p><strong>Profissional:</strong> Rosana</p>
+                                </div>
+                            </div>
+            
+
+                            <div class="day">
+                                <h2>Domingo, 12 de Novembro</h2>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 10:00</p>
+                                    <p><strong>Cliente:</strong> Júlia Martins</p>
+                                    <p><strong>Serviço:</strong> Cabelo</p>
+                                    <p><strong>Profissional:</strong> Angela</p>
+                                </div>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 13:00</p>
+                                    <p><strong>Cliente:</strong> Camila Pereira</p>
+                                    <p><strong>Serviço:</strong> Pedicure</p>
+                                    <p><strong>Profissional:</strong> Rosana</p>
+                                </div>
+                            </div>
+
+                            <div class="day">
+                                <h2>Segunda-feira, 13 de Novembro</h2>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 08:30</p>
+                                    <p><strong>Cliente:</strong> Mariana Rocha</p>
+                                    <p><strong>Serviço:</strong> Cabelo</p>
+                                    <p><strong>Profissional:</strong> Angela</p>
+                                </div>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 11:00</p>
+                                    <p><strong>Cliente:</strong> Ana Costa</p>
+                                    <p><strong>Serviço:</strong> Pedicure</p>
+                                    <p><strong>Profissional:</strong> Rosana</p>
+                                </div>
+                            </div>
+
+                            <div class="day">
+                                <h2>Terça-feira, 14 de Novembro</h2>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 14:00</p>
+                                    <p><strong>Cliente:</strong> Elisa Souza</p>
+                                    <p><strong>Serviço:</strong> Alongamento de Unhas</p>
+                                    <p><strong>Profissional:</strong> Amabily</p>
+                                </div>
+                                <div class="appointment">
+                                    <p><strong>Horário:</strong> 16:30</p>
+                                    <p><strong>Cliente:</strong> Renata Alves</p>
+                                    <p><strong>Serviço:</strong> Manicure Simples</p>
+                                    <p><strong>Profissional:</strong> Angela</p>
+                                </div>
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+        <div id="adicionar-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" data-modal="adicionar-modal">&times;</span>
+                <h2>Adicionar Horário</h2>
+                <form>
+                    <label for="horario">Novo Horário:</label>
+                    <input type="time" id="horario" name="horario">
+                    <button type="submit">Adicionar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+        <script>
+            document.querySelectorAll('.close').forEach(btn => {
+            btn.addEventListener('click', (event) => {
+            const modalId = event.target.getAttribute('data-modal');
+            document.getElementById(modalId).style.display = 'none';
+            });
+            });
+
+
+            document.getElementById("btn-adicionar").addEventListener("click", () => {
+            document.getElementById("adicionar-modal").style.display = "block";
+            });
+
+            document.querySelectorAll(".close").forEach(closeBtn => {
+            closeBtn.addEventListener("click", (event) => {
+            const modalId = event.target.getAttribute("data-modal");
+            document.getElementById(modalId).style.display = "none";
+            });
+            });
+
+            window.addEventListener("click", (event) => {
+            if (event.target.classList.contains("modal")) {
+            event.target.style.display = "none";
+            }
+            });
+        </script>
+    </body>
+</html>
