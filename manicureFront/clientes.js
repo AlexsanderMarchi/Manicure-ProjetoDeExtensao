@@ -23,17 +23,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function formatarTelefone(telefone) {
-  const cleaned = telefone.replace(/\D/g, '');
+  const telefoneStr = String(telefone);
+  const cleaned = telefoneStr.replace(/\D/g, '');
   const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
   if (match) {
       return `${match[1]} ${match[2]}-${match[3]}`;
   }
-  return telefone;
+  return telefoneStr;
 }
 
+//Get
   async function fetchClientes() {
     try {
-      const response = await fetch('https://manicure-projetodeextensao.onrender.com/clientes');
+      // const response = await fetch('https://manicure-projetodeextensao.onrender.com/clientes');
+      const response = await fetch('http://localhost:8080/clientes');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -44,6 +47,34 @@ function formatarTelefone(telefone) {
     }
   }
 
+//Delete
+  async function deleteCliente(clienteId, row) {
+    try {
+      const response = await fetch(`https://manicure-projetodeextensao.onrender.com/clientes/${clienteId}`, {
+      // const response = await fetch(`http://localhost:8080/clientes/${clienteId}`, {
+        method: "DELETE",
+      });
+  
+      if (!response.ok) {
+        throw new Error("Erro ao excluir cliente");
+      }
+      row.remove();
+      alert("Cliente excluído com sucesso!");
+    } catch (error) {
+      console.error("Erro na requisição DELETE:", error);
+      alert("Erro ao excluir cliente.");
+    }
+  }
+  document.addEventListener("click", async (event) => {
+    if (event.target.classList.contains("delete-btn")) {
+      const row = event.target.closest("tr");
+      const clienteId = event.target.getAttribute("data-id");
+  
+      if (confirm("Tem certeza que deseja excluir este cliente?")) {
+        await deleteCliente(clienteId, row);
+      }
+    }
+  });
 
   // Função para popular a tabela
   function populateTable(services) {
@@ -59,7 +90,7 @@ function formatarTelefone(telefone) {
         <td>${service?.email ? service.email : "--"}
           <span class="actions">
               <button class="edit-btn">✏️</button>
-              <button class="delete-btn">🗑️</button>
+              <button class="delete-btn" data-id='${service.telefone}'>🗑️</button>
           </span>
         </td>
       `;

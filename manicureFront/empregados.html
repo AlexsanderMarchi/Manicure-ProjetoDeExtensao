@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
         <title>Clientes</title>
-        <link rel="stylesheet" href="clientes.css">
+        <link rel="stylesheet" href="empregados.css">
     </head>
     <body>
         <input type="checkbox" id="nav-toggle">
@@ -37,7 +37,7 @@
                         <span>Financeiro</span></a>
                     </li>
                     <li>
-                        <a href="" class="tab-buttons active"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 20 20">
+                        <a href="clientes.html" class="tab-buttons tab-hover"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 20 20">
                                 <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
                                     <path d="M5 9a2 2 0 1 0 0-4a2 2 0 0 0 0 4m0 1a3 3 0 1 0 0-6a3 3 0 0 0 0 6" />
                                     <path d="M3.854 8.896a.5.5 0 0 1 0 .708l-.338.337A3.47 3.47 0 0 0 2.5 12.394v1.856a.5.5 0 1 1-1 0v-1.856a4.47 4.47 0 0 1 1.309-3.16l.337-.338a.5.5 0 0 1 .708 0m11.792-.3a.5.5 0 0 0 0 .708l.338.337A3.47 3.47 0 0 1 17 12.094v2.156a.5.5 0 0 0 1 0v-2.156a4.47 4.47 0 0 0-1.309-3.16l-.337-.338a.5.5 0 0 0-.708 0" />
@@ -62,7 +62,7 @@
                         <span>Horários</span></a>
                     </li>
                 <li>
-                    <a href="empregados.html" class="tab-buttons tab-hover"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                    <a href="empregados.html" class="tab-buttons active"><svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M16 17v2H2v-2s0-4 7-4s7 4 7 4m-3.5-9.5A3.5 3.5 0 1 0 9 11a3.5 3.5 0 0 0 3.5-3.5m3.44 5.5A5.32 5.32 0 0 1 18 17v2h4v-2s0-3.63-6.06-4M15 4a3.4 3.4 0 0 0-1.93.59a5 5 0 0 1 0 5.82A3.4 3.4 0 0 0 15 11a3.5 3.5 0 0 0 0-7" />
                     </svg>
                     <span>Empregados</span></a>
@@ -98,60 +98,193 @@
                     </div>
                 </div>
             </header>
-            <div class="clientes">
+            <div class="empregados">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Clientes</h3>
-                        <button class="btn-adicionar">Adicionar Cliente</button>
-                        </a>
+                        <h3>Empregados</h3>
+                        <div id="modal" class="modal hidden">
+                            <div class="modal-content">
+                                <h3 id="modal-title">Adicionar Empregado</h3>
+                                <form id="employee-form">
+                                    <label for="name">Nome:</label>
+                                    <input type="text" id="name" name="name" required>
+                                    
+                                    <label for="phone">Telefone:</label>
+                                    <input type="text" id="phone" name="phone" required>
+                                    
+                                    <label for="email">E-mail:</label>
+                                    <input type="email" id="email" name="email" required>
+                                    
+                                    <div class="modal-buttons">
+                                        <button type="submit" class="btn-submit">Salvar</button>
+                                        <button type="button" id="close-modal" class="btn-cancel">Cancelar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <button class="btn-adicionar">Adicionar Empregado</button>                    
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Nome do Cliente</th>
+                                        <th>Nome do Empregado</th>
                                         <th>Telefone</th>
                                         <th>E-mail</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tableBody">
+                                <tbody>
+                                    <tr>
+                                        <td>Amanda Souza</td>
+                                        <td>(48) 1234-5678</td>
+                                        <td>Amandasouza@gmail.com
+                                            <span class="actions">
+                                                <button class="edit-btn">✏️</button>
+                                                <button class="delete-btn">🗑️</button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jessica Campos</td>
+                                        <td>(48) 9876-5432</td>
+                                        <td>jessicacampos@gmail.com
+                                            <span class="actions">
+                                                <button class="edit-btn">✏️</button>
+                                                <button class="delete-btn">🗑️</button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vanessa Silva</td>
+                                        <td>(48) 4567-8910</td>
+                                        <td>vanessasilva@gmail.com
+                                            <span class="actions">
+                                                <button class="edit-btn">✏️</button>
+                                                <button class="delete-btn">🗑️</button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Livia Guesser</td>
+                                        <td>(48) 2345-6789</td>
+                                        <td>liviaguesser@gmail.com
+                                            <span class="actions">
+                                                <button class="edit-btn">✏️</button>
+                                                <button class="delete-btn">🗑️</button>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rosana Peres</td>
+                                        <td>(48) 3456-7891</td>
+                                        <td>rosanaperes@gmail.com
+                                            <span class="actions">
+                                                <button class="edit-btn">✏️</button>
+                                                <button class="delete-btn">🗑️</button>
+                                            </span>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>                                                    
                     </div>
                 </div>
-            </div>  
-            <div id="adicionar-modal" class="modal">
-                                <div class="modal-content">
-                                    <span class="close" data-modal="adicionar-modal">&times;</span>
-                                    <h2>Adicionar Novo Agendamento</h2>
-                                    <form id="adicionar-form">
-                                        <div>
-                                            <label for="nome">Nome:</label>
-                                            <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
-                                        </div>
-                                        <div>
-                                            <label for="horario">Horário:</label>
-                                            <input type="time" id="horario" name="horario" required>
-                                        </div>
-                                        <div>
-                                            <label for="servico">Serviço:</label>
-                                            <select id="servico" name="servico" required>
-                                                <option value="" disabled selected>Selecione um serviço</option>
-                                                <option value="corte">Corte</option>
-                                                <option value="manicure">Manicure</option>
-                                                <option value="pedicure">Pedicure</option>
-                                                <option value="coloração">Coloração</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label for="profissional">Profissional:</label>
-                                            <input type="text" id="profissional" name="profissional" placeholder="Digite o nome do profissional" required>
-                                        </div>
-                                        <button type="submit">Adicionar</button>
-                                    </form>
-                                </div>
-                            </div>
-        <script src="clientes.js"></script>              
+            </div>      
+        </div>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                    const modal = document.getElementById("modal");
+                    const modalTitle = document.getElementById("modal-title");
+                    const employeeForm = document.getElementById("employee-form");
+                    const employeeTable = document.querySelector(".table tbody");
+                    const addEmployeeButton = document.querySelector(".btn-adicionar");
+                    const closeModal = document.getElementById("close-modal");
+                    let currentEditingRow = null;
+
+                    // Abrir modal para adicionar
+                    addEmployeeButton.addEventListener("click", () => {
+                        modalTitle.textContent = "Adicionar Empregado"; // Define o título
+                        employeeForm.reset(); // Limpa o formulário
+                        modal.classList.remove("hidden"); // Exibe o modal
+                        currentEditingRow = null; // Reseta a edição
+                    });
+
+                    // Fechar modal ao clicar no botão "Cancelar"
+                    closeModal.addEventListener("click", () => {
+                        modal.classList.add("hidden");
+                    });
+
+                    // Fechar modal ao clicar fora da área do modal
+                    modal.addEventListener("click", (event) => {
+                        if (event.target === modal) {
+                            modal.classList.add("hidden");
+                        }
+                    });
+
+                    // Salvar empregado ao enviar o formulário
+                    employeeForm.addEventListener("submit", (e) => {
+                        e.preventDefault();
+
+                        const name = document.getElementById("name").value;
+                        const phone = document.getElementById("phone").value;
+                        const email = document.getElementById("email").value;
+
+                        if (currentEditingRow) {
+                            // Atualizar linha existente
+                            currentEditingRow.children[0].textContent = name;
+                            currentEditingRow.children[1].textContent = phone;
+                            currentEditingRow.children[2].innerHTML = `${email}
+                                <span class="actions">
+                                    <button class="edit-btn">✏️</button>
+                                    <button class="delete-btn">🗑️</button>
+                                </span>`;
+                            addRowListeners(currentEditingRow);
+                        } else {
+                            // Adicionar novo empregado
+                            const newRow = document.createElement("tr");
+                            newRow.innerHTML = `
+                                <td>${name}</td>
+                                <td>${phone}</td>
+                                <td>${email}
+                                    <span class="actions">
+                                        <button class="edit-btn">✏️</button>
+                                        <button class="delete-btn">🗑️</button>
+                                    </span>
+                                </td>`;
+                            addRowListeners(newRow);
+                            employeeTable.appendChild(newRow);
+                        }
+
+                        modal.classList.add("hidden"); // Fecha o modal
+                    });
+
+                    // Adicionar eventos de edição e exclusão às linhas
+                    function addRowListeners(row) {
+                        row.querySelector(".edit-btn").addEventListener("click", () => editEmployee(row));
+                        row.querySelector(".delete-btn").addEventListener("click", () => deleteEmployee(row));
+                    }
+
+                    // Função para editar empregado
+                    function editEmployee(row) {
+                        currentEditingRow = row;
+                        modalTitle.textContent = "Editar Empregado"; // Título para edição
+                        document.getElementById("name").value = row.children[0].textContent;
+                        document.getElementById("phone").value = row.children[1].textContent;
+                        document.getElementById("email").value = row.children[2].textContent.trim();
+                        modal.classList.remove("hidden");
+                    }
+
+                    // Função para excluir empregado
+                    function deleteEmployee(row) {
+                        row.remove();
+                    }
+
+                    // Adicionar os eventos às linhas existentes
+                    document.querySelectorAll(".table tbody tr").forEach((row) => addRowListeners(row));
+            });
+
+        </script>
+
     </body>
 </html>

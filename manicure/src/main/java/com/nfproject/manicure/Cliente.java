@@ -5,9 +5,9 @@ package com.nfproject.manicure;
 public class Cliente {
     private String nome;
     private String sobreNome;
-    private String telefone;
+    private long telefone;
 
-    public Cliente (String nome, String sobreNome, String telefone){
+    public Cliente (String nome, String sobreNome, long telefone){
         setNome(nome);
         setSobreNome(sobreNome);
         setTelefone(telefone);
@@ -34,21 +34,19 @@ public class Cliente {
         }
     }
     
-    public String getTelefone() {
+    public long getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
-        if(!telefone.isBlank()){
+    public void setTelefone(long telefone) {
             this.telefone = telefone;
-        }
     }
     
     @Override
     public String toString(){
         String cliente = """
                      Cliente: %s %s
-                     Contato: %s
+                     Contato: %d
                      """;
         String clientesFormatados = String.format(cliente, nome, sobreNome, telefone);
         

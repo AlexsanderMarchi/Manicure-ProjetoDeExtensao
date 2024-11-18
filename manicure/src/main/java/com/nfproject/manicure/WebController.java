@@ -25,14 +25,18 @@ public class WebController {
     
     public WebController() {
         // Inicializando Clientes
-        Cliente anaBeatriz = new Cliente("Ana", "Beatriz", "48998878787");
-        Cliente carlaFontes = new Cliente("Carla", "Fontes", "48987654321");
-        Cliente roebrtaDores = new Cliente("Roberta", "das Dores", "48987612345");
-        Cliente gertrudesSilva = new Cliente("Gertrudes", "Silva", "48967854820");
+        Cliente anaBeatriz = new Cliente("Ana", "Beatriz", 48998878787L);
+        Cliente carlaFontes = new Cliente("Carla", "Fontes", 48987654321L);
+        Cliente roebrtaDores = new Cliente("Roberta", "das Dores", 48987612345L);
+        Cliente gertrudesSilva = new Cliente("Gertrudes", "Silva", 48967854820L);
+        Cliente gertrudesSilva2 = new Cliente("Gertrudes2", "Silva2", 48967854822L);
+        Cliente gertrudesSilva3 = new Cliente("Gertrudes3", "Silva3", 48967854823L);
         clientes.add(anaBeatriz);
         clientes.add(carlaFontes);
         clientes.add(roebrtaDores);
         clientes.add(gertrudesSilva);
+        clientes.add(gertrudesSilva2);
+        clientes.add(gertrudesSilva3);
 
         // Inicializando Produtos
         Produtos esmalte = new Produtos("Esmalte", 19.90, 13);
@@ -117,16 +121,20 @@ public class WebController {
 //        }
 //    }
 //    
-//    @DeleteMapping("/clientes/{index}")
-//    public String deleteCliente(@PathVariable int index) {
-//        if (index >= 0 && index < clientes.size()) {
-//            clientes.remove(index);
-//            return "Cliente removido com sucesso!";
-//        } else {
-//            throw new IllegalArgumentException("Índice inválido");
-//        }
-//    }
-    
+    @DeleteMapping("/clientes/{telefone}")
+public String deleteCliente(@PathVariable long telefone) {
+    Cliente cliente = clientes.stream()
+                              .filter(c -> c.getTelefone() == telefone)
+                              .findFirst()
+                              .orElse(null);
+
+    if (cliente != null) {
+        clientes.remove(cliente);
+        return "Cliente removido com sucesso!";
+    } else {
+        throw new IllegalArgumentException("Cliente com telefone " + telefone + " não encontrado");
+    }
+}
     //----------------------------------------------------------------------------------
     //Crud Produtos
     
