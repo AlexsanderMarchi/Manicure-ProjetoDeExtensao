@@ -115,61 +115,43 @@
                                         <th>E-mail</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Amanda Souza</td>
-                                        <td>(48) 1234-5678</td>
-                                        <td>Amandasouza@gmail.com
-                                            <span class="actions">
-                                                <button class="edit-btn">✏️</button>
-                                                <button class="delete-btn">🗑️</button>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jessica Campos</td>
-                                        <td>(48) 9876-5432</td>
-                                        <td>jessicacampos@gmail.com
-                                            <span class="actions">
-                                                <button class="edit-btn">✏️</button>
-                                                <button class="delete-btn">🗑️</button>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vanessa Silva</td>
-                                        <td>(48) 4567-8910</td>
-                                        <td>vanessasilva@gmail.com
-                                            <span class="actions">
-                                                <button class="edit-btn">✏️</button>
-                                                <button class="delete-btn">🗑️</button>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Livia Guesser</td>
-                                        <td>(48) 2345-6789</td>
-                                        <td>liviaguesser@gmail.com
-                                            <span class="actions">
-                                                <button class="edit-btn">✏️</button>
-                                                <button class="delete-btn">🗑️</button>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rosana Peres</td>
-                                        <td>(48) 3456-7891</td>
-                                        <td>rosanaperes@gmail.com
-                                            <span class="actions">
-                                                <button class="edit-btn">✏️</button>
-                                                <button class="delete-btn">🗑️</button>
-                                            </span>
-                                        </td>
-                                    </tr>
+                                <tbody id="tableBody">
                                 </tbody>
                             </table>                                                    
                     </div>
                 </div>
-            </div>                
+            </div>  
+            <div id="adicionar-modal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close" data-modal="adicionar-modal">&times;</span>
+                                    <h2>Adicionar Novo Agendamento</h2>
+                                    <form id="adicionar-form">
+                                        <div>
+                                            <label for="nome">Nome:</label>
+                                            <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
+                                        </div>
+                                        <div>
+                                            <label for="horario">Horário:</label>
+                                            <input type="time" id="horario" name="horario" required>
+                                        </div>
+                                        <div>
+                                            <label for="servico">Serviço:</label>
+                                            <select id="servico" name="servico" required>
+                                                <option value="" disabled selected>Selecione um serviço</option>
+                                                <option value="corte">Corte</option>
+                                                <option value="manicure">Manicure</option>
+                                                <option value="pedicure">Pedicure</option>
+                                                <option value="coloração">Coloração</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="profissional">Profissional:</label>
+                                            <input type="text" id="profissional" name="profissional" placeholder="Digite o nome do profissional" required>
+                                        </div>
+                                        <button type="submit">Adicionar</button>
+                                    </form>
+                                </div>
+                            </div>
+        <script src="clientes.js"></script>              
     </body>
 </html>

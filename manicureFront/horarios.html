@@ -135,7 +135,7 @@
                             </div>
                         </div>
                         <div class="agenda">
-                            <div class="day">
+                            <!-- <div class="day">
                                 <h2>Segunda-feira, 6 de Novembro</h2>
                                 <div class="appointment">
                                     <p><strong>Horário:</strong> 09:00</p>
@@ -235,96 +235,12 @@
                                     <p><strong>Serviço:</strong> Pedicure</p>
                                     <p><strong>Profissional:</strong> Rosana</p>
                                 </div>
-                            </div>
-            
-
-                            <div class="day">
-                                <h2>Domingo, 12 de Novembro</h2>
-                                <div class="appointment">
-                                    <p><strong>Horário:</strong> 10:00</p>
-                                    <p><strong>Cliente:</strong> Júlia Martins</p>
-                                    <p><strong>Serviço:</strong> Cabelo</p>
-                                    <p><strong>Profissional:</strong> Angela</p>
-                                </div>
-                                <div class="appointment">
-                                    <p><strong>Horário:</strong> 13:00</p>
-                                    <p><strong>Cliente:</strong> Camila Pereira</p>
-                                    <p><strong>Serviço:</strong> Pedicure</p>
-                                    <p><strong>Profissional:</strong> Rosana</p>
-                                </div>
-                            </div>
-
-                            <div class="day">
-                                <h2>Segunda-feira, 13 de Novembro</h2>
-                                <div class="appointment">
-                                    <p><strong>Horário:</strong> 08:30</p>
-                                    <p><strong>Cliente:</strong> Mariana Rocha</p>
-                                    <p><strong>Serviço:</strong> Cabelo</p>
-                                    <p><strong>Profissional:</strong> Angela</p>
-                                </div>
-                                <div class="appointment">
-                                    <p><strong>Horário:</strong> 11:00</p>
-                                    <p><strong>Cliente:</strong> Ana Costa</p>
-                                    <p><strong>Serviço:</strong> Pedicure</p>
-                                    <p><strong>Profissional:</strong> Rosana</p>
-                                </div>
-                            </div>
-
-                            <div class="day">
-                                <h2>Terça-feira, 14 de Novembro</h2>
-                                <div class="appointment">
-                                    <p><strong>Horário:</strong> 14:00</p>
-                                    <p><strong>Cliente:</strong> Elisa Souza</p>
-                                    <p><strong>Serviço:</strong> Alongamento de Unhas</p>
-                                    <p><strong>Profissional:</strong> Amabily</p>
-                                </div>
-                                <div class="appointment">
-                                    <p><strong>Horário:</strong> 16:30</p>
-                                    <p><strong>Cliente:</strong> Renata Alves</p>
-                                    <p><strong>Serviço:</strong> Manicure Simples</p>
-                                    <p><strong>Profissional:</strong> Angela</p>
-                                </div>
-                            </button>
-                            </div>
+                            </div> -->
+                        
                         </div>
                     </div>
-        <div id="adicionar-modal" class="modal">
-            <div class="modal-content">
-                <span class="close" data-modal="adicionar-modal">&times;</span>
-                <h2>Adicionar Horário</h2>
-                <form>
-                    <label for="horario">Novo Horário:</label>
-                    <input type="time" id="horario" name="horario">
-                    <button type="submit">Adicionar</button>
-                </form>
-            </div>
         </div>
     </div>
-        <script>
-            document.querySelectorAll('.close').forEach(btn => {
-            btn.addEventListener('click', (event) => {
-            const modalId = event.target.getAttribute('data-modal');
-            document.getElementById(modalId).style.display = 'none';
-            });
-            });
-
-
-            document.getElementById("btn-adicionar").addEventListener("click", () => {
-            document.getElementById("adicionar-modal").style.display = "block";
-            });
-
-            document.querySelectorAll(".close").forEach(closeBtn => {
-            closeBtn.addEventListener("click", (event) => {
-            const modalId = event.target.getAttribute("data-modal");
-            document.getElementById(modalId).style.display = "none";
-            });
-            });
-
-            window.addEventListener("click", (event) => {
-            if (event.target.classList.contains("modal")) {
-            event.target.style.display = "none";
-            }
-            });
-        </script>
+        <script src="horarios.js"></script>
     </body>
 </html>
