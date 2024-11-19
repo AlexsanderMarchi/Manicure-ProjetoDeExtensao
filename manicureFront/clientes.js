@@ -35,8 +35,8 @@ function formatarTelefone(telefone) {
 //Get
   async function fetchClientes() {
     try {
-      // const response = await fetch('https://manicure-projetodeextensao.onrender.com/clientes');
-      const response = await fetch('http://localhost:8080/clientes');
+      const response = await fetch('https://manicure-projetodeextensao.onrender.com/clientes');
+      // const response = await fetch('http://localhost:8080/clientes');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
