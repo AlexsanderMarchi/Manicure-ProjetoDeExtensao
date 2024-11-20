@@ -104,23 +104,35 @@ public class WebController {
     public List<Cliente> getClientes() {
         return clientes;
     }
-//    
-//    @PostMapping("/clientes")
-//    public Cliente createCliente(@RequestBody Cliente novoCliente) {
-//        clientes.add(novoCliente);
-//        return novoCliente;
-//    }
-//    
-//    @PutMapping("/clientes/{index}")
-//    public Cliente updateCliente(@PathVariable int index, @RequestBody Cliente clienteAtualizado) {
-//        if (index >= 0 && index < clientes.size()) {
-//            clientes.set(index, clienteAtualizado);
-//            return clienteAtualizado;
-//        } else {
-//            throw new IllegalArgumentException("Índice inválido");
-//        }
-//    }
-//    
+    
+    @PostMapping("/clientes")
+    public Cliente createCliente(@RequestBody Cliente novoCliente) {
+        clientes.add(novoCliente);
+        return novoCliente;
+    }
+    
+   @PutMapping("/clientes/{telefone}")
+public Cliente updateCliente(@PathVariable long telefone, @RequestBody Cliente clienteAtualizado) {
+    // Buscar o cliente com o telefone fornecido
+    Cliente clienteExistente = clientes.stream()
+                                       .filter(c -> c.getTelefone() == telefone)
+                                       .findFirst()
+                                       .orElse(null);
+
+    // Verifica se o cliente foi encontrado
+    if (clienteExistente != null) {
+        // Atualiza os dados do cliente
+        clienteExistente.setNome(clienteAtualizado.getNome());
+        clienteExistente.setSobreNome(clienteAtualizado.getSobreNome());
+        clienteExistente.setTelefone(clienteAtualizado.getTelefone());
+
+        // Retorna o cliente atualizado
+        return clienteExistente;
+    } else {
+        throw new IllegalArgumentException("Cliente com telefone " + telefone + " não encontrado");
+    }
+}
+    
     @DeleteMapping("/clientes/{telefone}")
 public String deleteCliente(@PathVariable long telefone) {
     Cliente cliente = clientes.stream()
