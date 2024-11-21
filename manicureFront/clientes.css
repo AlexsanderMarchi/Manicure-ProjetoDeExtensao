@@ -15,6 +15,14 @@
   text-decoration: none;
   font-family: "Poppins", sans-serif;
 }
+
+.button-row-direction {
+  display: flex;
+  flex-direction: row;
+  margin: 2rem 0.5rem 0.5rem 0.5rem;
+  gap: 2rem;
+}
+
 .sidebar-menu a.tab-buttons {
   padding-top: 1rem;
   padding-bottom: 1rem;

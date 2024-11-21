@@ -19,9 +19,8 @@ public class WebController {
     
     private final List<HoraMarcada> agendamentoGerais = new ArrayList<>();
     private final List<Cliente> clientes = new ArrayList<>();
-    private final List<Produtos> produtos = new ArrayList<>();
-    private final List<Produtos> produtosEstoque = new ArrayList<>();
-    private final List<Empregado> empregados = new ArrayList<>();
+//    private final List<Produtos> produtos = new ArrayList<>();
+//    private final List<Produtos> produtosEstoque = new ArrayList<>();
     
     public WebController() {
         // Inicializando Clientes
@@ -39,34 +38,30 @@ public class WebController {
         clientes.add(gertrudesSilva3);
 
         // Inicializando Produtos
-        Produtos esmalte = new Produtos("Esmalte", 19.90, 13);
-        Produtos acetona = new Produtos("Acetona", 25.90, 10);
-        Produtos alicate = new Produtos("Alicate", 70.90, 100);
-        Produtos tesoura = new Produtos("Tesoura", 30.79, 24);
-        Produtos alicateGrande = new Produtos("Alicate grande", 70.25, 0);
-        Produtos algodao = new Produtos("Algodão", 5.25, 0);
-        produtos.add(esmalte);
-        produtos.add(acetona);
-        produtos.add(alicate);
-        produtos.add(tesoura);
-        produtos.add(alicateGrande);
-        produtos.add(algodao);
+//        Produtos esmalte = new Produtos("Esmalte", 19.90, 13);
+//        Produtos acetona = new Produtos("Acetona", 25.90, 10);
+//        Produtos alicate = new Produtos("Alicate", 70.90, 100);
+//        Produtos tesoura = new Produtos("Tesoura", 30.79, 24);
+//        Produtos alicateGrande = new Produtos("Alicate grande", 70.25, 0);
+//        Produtos algodao = new Produtos("Algodão", 5.25, 0);
+//        produtos.add(esmalte);
+//        produtos.add(acetona);
+//        produtos.add(alicate);
+//        produtos.add(tesoura);
+//        produtos.add(alicateGrande);
+//        produtos.add(algodao);
     
-        for (Produtos produto : produtos) {
-            if (produto.getQtd_estoque() > 0) {
-                produtosEstoque.add(produto);
-            }
-        }
+//        for (Produtos produto : produtos) {
+//            if (produto.getQtd_estoque() > 0) {
+//                produtosEstoque.add(produto);
+//            }
+//        }
         
         // Inicializando Agendamentos
         HoraMarcada horaAna = new HoraMarcada("11 de Outubro", "11:00", anaBeatriz);
         HoraMarcada horaCarla = new HoraMarcada("10 de Outubro", "12:00", carlaFontes);
         agendamentoGerais.add(horaAna);
         agendamentoGerais.add(horaCarla);
-        
-        // Inicializando Empregados
-        Empregado ramonaFlowers = new Empregado("Ramona", "Flowers", "48967854820", "Manicure");
-        empregados.add(ramonaFlowers);
     }
     
     //----------------------------------------------------------------------------------
@@ -77,10 +72,10 @@ public class WebController {
         return agendamentoGerais;
     }
     
-    @GetMapping("/empregados")
-    public List<Empregado> getEmpregados() {
-        return empregados;
-    }
+//    @GetMapping("/empregados")
+//    public List<Empregado> getEmpregados() {
+//        return empregados;
+//    }
     
     @GetMapping("/agendamentos/total")
     public int getTotalAgendamentos() {
@@ -92,11 +87,11 @@ public class WebController {
         return clientes.size();
     }
     
-    @GetMapping("/produtos/total-estoque")
-    public int getTotalProdutosEstoque() {
-           return produtosEstoque.size();
-    }
-    
+//    @GetMapping("/produtos/total-estoque")
+//    public int getTotalProdutosEstoque() {
+//           return produtosEstoque.size();
+//    }
+//    
     //----------------------------------------------------------------------------------
     //Crud Clientes
     
@@ -150,10 +145,10 @@ public String deleteCliente(@PathVariable long telefone) {
     //----------------------------------------------------------------------------------
     //Crud Produtos
     
-    @GetMapping("/produtos")
-    public List<Produtos> getProdutos() {
-        return produtos;
-    }
+//    @GetMapping("/produtos")
+//    public List<Produtos> getProdutos() {
+//        return produtos;
+//    }
 //    
 //    @PostMapping("/produtos")
 //    public Produtos createProduto(@RequestBody Produtos novoProduto) {

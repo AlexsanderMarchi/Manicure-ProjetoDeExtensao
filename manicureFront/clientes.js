@@ -1,6 +1,7 @@
+//----------------------MODAIS ADICIONAR/EDITAR----------------------//
+
 let modalEditar;
 let clienteIdEditando = null;
-
 document.addEventListener("DOMContentLoaded", () => {
   //Modal Adcionar
   const adicionarButton = document.querySelector(".btn-adicionar");
@@ -33,9 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   });
 
+  //----------------------ADICIONAR CLIENTE----------------------//
+
   // Enviar dados do formulário via POST para a API
   adicionarForm.addEventListener("submit", async (event) => {
-    event.preventDefault(); // Impede o envio padrão do formulário
+    event.preventDefault();
 
     const nome = document.getElementById("nome").value;
     const sobreNome = document.getElementById("sobreNome").value;
@@ -44,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const clienteData = {
       nome: nome,
       sobreNome: sobreNome,
-      telefone: parseInt(telefone) // Converte o telefone para número inteiro (long)
+      telefone: parseInt(telefone)
     };
 
     try {
@@ -74,6 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   
+  //----------------------EDITAR CLIENTE----------------------//
+
   // Fechar modal de edição
   closeButtonEditar.addEventListener("click", () => {
     modalEditar.style.display = "none";
@@ -81,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
    // Enviar dados de edição via PUT para a API
   editarForm.addEventListener("submit", async (event) => {
-    event.preventDefault(); // Impede o envio padrão do formulário
+    event.preventDefault();
 
     const nome = document.getElementById("nomeEditado").value;
     const sobreNome = document.getElementById("sobreNomeEditado").value;
@@ -90,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const clienteData = {
       nome: nome,
       sobreNome: sobreNome,
-      telefone: parseInt(telefone) // Converte o telefone para número inteiro (long)
+      telefone: parseInt(telefone)
     };
 
     console.log("Dados a serem enviados para edição:", clienteData);
@@ -109,11 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const data = await response.json();
-
-      // Fechar o modal após editar o cliente
       modalEditar.style.display = "none";
-
-      // Atualizar a tabela com o cliente atualizado
       await fetchClientes();
 
     } catch (error) {
@@ -124,32 +125,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Função para editar um cliente
 function editarCliente(cliente) {
-  clienteIdEditando = cliente.telefone; // Armazena o telefone para o PUT
-
-  // Preencher os campos do formulário com os dados do cliente
+  clienteIdEditando = cliente.telefone;
   document.getElementById("nomeEditado").value = cliente.nome;
   document.getElementById("sobreNomeEditado").value = cliente.sobreNome;
   document.getElementById("telefoneEditado").value = cliente.telefone;
 
-  // Verifica se o modal de edição existe antes de tentar acessá-lo
   if (modalEditar) {
     modalEditar.style.display = "block";
   } else {
     console.error("Modal de edição não encontrado.");
   }
 }
-function formatarTelefone(telefone) {
-  const telefoneStr = String(telefone);
-  const cleaned = telefoneStr.replace(/\D/g, '');
-  const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
-  if (match) {
-      return `${match[1]} ${match[2]}-${match[3]}`;
-  }
-  return telefoneStr;
-}
 
+//----------------------BUSCAR DADOS----------------------//
 
-//Método Get para buscar os dados
+//Método Get para buscar os Clientes
   async function fetchClientes() {
     try {
       const response = await fetch('https://manicure-projetodeextensao.onrender.com/clientes');
@@ -164,7 +154,9 @@ function formatarTelefone(telefone) {
     }
   }
 
-//Método Delete para apagar um dado especifico
+//----------------------EXCLUSÃO----------------------//
+
+  //Fetch com método Delete para apagar um cliente especifico
   async function deleteCliente(clienteId, row) {
     try {
       const response = await fetch(`https://manicure-projetodeextensao.onrender.com/clientes/${clienteId}`, {
@@ -176,24 +168,49 @@ function formatarTelefone(telefone) {
         throw new Error("Erro ao excluir cliente");
       }
       row.remove();
-      alert("Cliente excluído com sucesso!");
     } catch (error) {
       console.error("Erro na requisição DELETE:", error);
-      alert("Erro ao excluir cliente.");
     }
   }
+  //Modal de exclusão
   document.addEventListener("click", async (event) => {
     if (event.target.classList.contains("delete-btn")) {
       const row = event.target.closest("tr");
       const clienteId = event.target.getAttribute("data-id");
   
-      if (confirm("Tem certeza que deseja excluir este cliente?")) {
+      // Exibe o modal
+      const modalExcluir = document.getElementById("apagar-modal");
+      modalExcluir.style.display = "block";
+
+      // botão "Excluir" no modal
+      const excluirButton = modalExcluir.querySelector("button:last-of-type");
+      excluirButton.onclick = async () => {
         await deleteCliente(clienteId, row);
-      }
+        modalExcluir.style.display = "none";
+      };
+
+      // botão "Cancelar" no modal
+      const cancelarButton = modalExcluir.querySelector("button:first-of-type");
+      cancelarButton.onclick = () => {
+        modalExcluir.style.display = "none"; 
+      };
     }
   });
 
-  // Função para popular a tabela
+  //----------------------OUTRAS FUNÇÕES----------------------//
+
+  // Função para converter telefone
+  function formatarTelefone(telefone) {
+    const telefoneStr = String(telefone);
+    const cleaned = telefoneStr.replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
+    if (match) {
+        return `${match[1]} ${match[2]}-${match[3]}`;
+    }
+    return telefoneStr;
+  }
+
+  // Função para renderizar os clientes na tabela
   function populateTable(services) {
     const tableBody = document.getElementById("tableBody");
     tableBody.innerHTML = '';
@@ -216,8 +233,6 @@ function formatarTelefone(telefone) {
       tableBody.appendChild(row);
     });
   }
-
-
   window.onload = async () => {
     await fetchClientes();
 };

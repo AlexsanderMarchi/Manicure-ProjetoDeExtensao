@@ -220,7 +220,7 @@ main {
   margin-top: 3.5rem;
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: 65% auto;
+  grid-template-columns: 100%;
 }
 
 .card {
