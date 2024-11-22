@@ -52,14 +52,17 @@ function populateAgenda(appointments) {
       dayDiv.classList.add('day');
 
       // Título do dia
-      const dayTitle = document.createElement('h2');
-      const formattedDate = new Date(date).toLocaleDateString('pt-BR', {
-          weekday: 'long',
-          day: 'numeric',
-          month: 'long',
-      });
-      dayTitle.textContent = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-      dayDiv.appendChild(dayTitle);
+    const dayTitle = document.createElement('h2');
+    dayTitle.textContent = date.charAt(0).toUpperCase() + date.slice(1); // Capitalizar a primeira letra
+    dayDiv.appendChild(dayTitle);
+      // const dayTitle = document.createElement('h2');
+      // const formattedDate = new Date(date).toLocaleDateString('pt-BR', {
+      //     weekday: 'long',
+      //     day: 'numeric',
+      //     month: 'long',
+      // });
+      // dayTitle.textContent = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+      // dayDiv.appendChild(dayTitle);
 
       // Adicionar agendamentos
       groupedByDay[date].forEach((appointment) => {
@@ -69,8 +72,7 @@ function populateAgenda(appointments) {
           appointmentDiv.innerHTML = `
               <p><strong>Horário:</strong> ${appointment.hora}</p>
               <p><strong>Cliente:</strong> ${appointment.cliente.nome} ${appointment.cliente.sobreNome}</p>
-              <p><strong>Serviço:</strong> ${appointment.servico}</p>
-              <p><strong>Profissional:</strong> ${appointment.profissional}</p>
+              <p><strong>Serviço:</strong> ${appointment.servico.nome}</p>
           `;
           dayDiv.appendChild(appointmentDiv);
       });

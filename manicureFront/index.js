@@ -50,8 +50,8 @@ function formatarTelefone(telefone) {
 
 async function fetchAgendamentos() {
     try {
-      const response = await fetch('http://localhost:8080/agendamentos');
-      // const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos');
+      // const response = await fetch('http://localhost:8080/agendamentos');
+      const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -64,8 +64,8 @@ async function fetchAgendamentos() {
 
   async function fetchCaixa() {
     try {
-      const response = await fetch('http://localhost:8080/caixa');
-      // const response = await fetch('https://manicure-projetodeextensao.onrender.com/caixa');
+      // const response = await fetch('http://localhost:8080/caixa');
+      const response = await fetch('https://manicure-projetodeextensao.onrender.com/caixa');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -82,8 +82,8 @@ async function fetchAgendamentos() {
 
   async function fetchTotalServicos() {
     try {
-      const response = await fetch('http://localhost:8080/servicos/total');
-      // const response = await fetch('https://manicure-projetodeextensao.onrender.com/servicos/total');
+      // const response = await fetch('http://localhost:8080/servicos/total');
+      const response = await fetch('https://manicure-projetodeextensao.onrender.com/servicos/total');
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }

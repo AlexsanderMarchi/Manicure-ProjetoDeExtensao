@@ -53,15 +53,33 @@ public class WebController {
         
         // Inicializando Agendamentos
         HoraMarcada horaAna = new HoraMarcada("11 de Outubro", "11:00", anaBeatriz, manicure);
-        HoraMarcada horaCarla = new HoraMarcada("10 de Outubro", "12:00", carlaFontes, pedicure);
+        HoraMarcada horaCarla = new HoraMarcada("10 de Outubro", "16:00", carlaFontes, pedicure);
+        HoraMarcada horaGertrudes = new HoraMarcada("10 de Outubro", "15:00", gertrudesSilva, alongamento);
+        HoraMarcada horaGertrude2 = new HoraMarcada("11 de Outubro", "11:00", gertrudesSilva, alongamento);
+        HoraMarcada horaGertrudes3 = new HoraMarcada("11 de Outubro", "19:00", gertrudesSilva, alongamento);
+        HoraMarcada anaBeatriz2 = new HoraMarcada("12 de Outubro", "16:00", anaBeatriz, pedicure);
+        HoraMarcada carlaFontes3 = new HoraMarcada("11 de Outubro", "13:00", carlaFontes, manicure);
+
+        
         agendamentoGerais.add(horaAna);
         agendamentoGerais.add(horaCarla);
+        agendamentoGerais.add(horaGertrudes);
+        agendamentoGerais.add(horaGertrude2);
+        agendamentoGerais.add(horaGertrudes3);
+        agendamentoGerais.add(anaBeatriz2);
+        agendamentoGerais.add(carlaFontes3);
         
         // Inicializando Caixa
         Financeiro horaAnaCaixa = new Financeiro(horaAna);
         Financeiro horaCarlaCaixa = new Financeiro(horaCarla);
+        Financeiro horaGertrudesCaixa = new Financeiro(horaGertrudes);
+        Financeiro horaGertrude2Caixa = new Financeiro(horaGertrude2);
+        Financeiro anaBeatriz2Caixa = new Financeiro(anaBeatriz2);
         caixa.add(horaAnaCaixa);
         caixa.add(horaCarlaCaixa);
+        caixa.add(horaGertrudesCaixa);
+        caixa.add(horaGertrude2Caixa);
+        caixa.add(anaBeatriz2Caixa);
     }
     
     //----------------------------------------------------------------------------------
