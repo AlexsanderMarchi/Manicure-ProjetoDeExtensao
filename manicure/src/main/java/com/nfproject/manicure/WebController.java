@@ -19,8 +19,8 @@ public class WebController {
     
     private final List<HoraMarcada> agendamentoGerais = new ArrayList<>();
     private final List<Cliente> clientes = new ArrayList<>();
-//    private final List<Produtos> produtos = new ArrayList<>();
-//    private final List<Produtos> produtosEstoque = new ArrayList<>();
+    private final List<Servico> servicos = new ArrayList<>();
+    private final List<Financeiro> caixa = new ArrayList<>();
     
     public WebController() {
         // Inicializando Clientes
@@ -37,31 +37,31 @@ public class WebController {
         clientes.add(gertrudesSilva2);
         clientes.add(gertrudesSilva3);
 
-        // Inicializando Produtos
-//        Produtos esmalte = new Produtos("Esmalte", 19.90, 13);
-//        Produtos acetona = new Produtos("Acetona", 25.90, 10);
-//        Produtos alicate = new Produtos("Alicate", 70.90, 100);
-//        Produtos tesoura = new Produtos("Tesoura", 30.79, 24);
-//        Produtos alicateGrande = new Produtos("Alicate grande", 70.25, 0);
-//        Produtos algodao = new Produtos("Algodão", 5.25, 0);
-//        produtos.add(esmalte);
-//        produtos.add(acetona);
-//        produtos.add(alicate);
-//        produtos.add(tesoura);
-//        produtos.add(alicateGrande);
-//        produtos.add(algodao);
-    
-//        for (Produtos produto : produtos) {
-//            if (produto.getQtd_estoque() > 0) {
-//                produtosEstoque.add(produto);
-//            }
-//        }
+        // Inicializando Servicos
+        Servico manicure = new Servico("Manicure", 19.90);
+        Servico pedicure = new Servico("Pedicure", 25.90);
+        Servico alongamento = new Servico("Alongamento", 70.90);
+        Servico tesoura = new Servico("Tesoura", 30.79);
+        Servico alicateGrande = new Servico("Alicate grande", 70.25);
+        Servico algodao = new Servico("Algodão", 5.25);
+        servicos.add(manicure);
+        servicos.add(pedicure);
+        servicos.add(alongamento);
+        servicos.add(tesoura);
+        servicos.add(alicateGrande);
+        servicos.add(algodao);
         
         // Inicializando Agendamentos
-        HoraMarcada horaAna = new HoraMarcada("11 de Outubro", "11:00", anaBeatriz);
-        HoraMarcada horaCarla = new HoraMarcada("10 de Outubro", "12:00", carlaFontes);
+        HoraMarcada horaAna = new HoraMarcada("11 de Outubro", "11:00", anaBeatriz, manicure);
+        HoraMarcada horaCarla = new HoraMarcada("10 de Outubro", "12:00", carlaFontes, pedicure);
         agendamentoGerais.add(horaAna);
         agendamentoGerais.add(horaCarla);
+        
+        // Inicializando Caixa
+        Financeiro horaAnaCaixa = new Financeiro(horaAna);
+        Financeiro horaCarlaCaixa = new Financeiro(horaCarla);
+        caixa.add(horaAnaCaixa);
+        caixa.add(horaCarlaCaixa);
     }
     
     //----------------------------------------------------------------------------------
@@ -71,11 +71,6 @@ public class WebController {
     public List<HoraMarcada> getAgendamentos() {
         return agendamentoGerais;
     }
-    
-//    @GetMapping("/empregados")
-//    public List<Empregado> getEmpregados() {
-//        return empregados;
-//    }
     
     @GetMapping("/agendamentos/total")
     public int getTotalAgendamentos() {
@@ -87,11 +82,16 @@ public class WebController {
         return clientes.size();
     }
     
-//    @GetMapping("/produtos/total-estoque")
-//    public int getTotalProdutosEstoque() {
-//           return produtosEstoque.size();
-//    }
-//    
+    @GetMapping("/servicos/total")
+    public int getTotalServicos() {
+           return servicos.size();
+    }
+    
+    @GetMapping("/caixa")
+    public List<Financeiro> getTotalCaixa() {
+           return caixa;
+    }
+    
     //----------------------------------------------------------------------------------
     //Crud Clientes
     
@@ -107,7 +107,7 @@ public class WebController {
     }
     
    @PutMapping("/clientes/{telefone}")
-public Cliente updateCliente(@PathVariable long telefone, @RequestBody Cliente clienteAtualizado) {
+    public Cliente updateCliente(@PathVariable long telefone, @RequestBody Cliente clienteAtualizado) {
     // Buscar o cliente com o telefone fornecido
     Cliente clienteExistente = clientes.stream()
                                        .filter(c -> c.getTelefone() == telefone)
@@ -143,39 +143,54 @@ public String deleteCliente(@PathVariable long telefone) {
     }
 }
     //----------------------------------------------------------------------------------
-    //Crud Produtos
+    //Crud Servicos
     
-//    @GetMapping("/produtos")
-//    public List<Produtos> getProdutos() {
-//        return produtos;
-//    }
-//    
-//    @PostMapping("/produtos")
-//    public Produtos createProduto(@RequestBody Produtos novoProduto) {
-//        produtos.add(novoProduto);
-//        return novoProduto;
-//    }
-//    
-//    @PutMapping("/produtos/{index}")
-//    public Produtos updateProduto(@PathVariable int index, @RequestBody Produtos produtoAtualizado) {
-//        if (index >= 0 && index < produtos.size()) {
-//            produtos.set(index, produtoAtualizado);
-//            return produtoAtualizado;
-//        } else {
-//            throw new IllegalArgumentException("Índice inválido");
-//        }
-//    }
-//    
-//    @DeleteMapping("/produtos/{index}")
-//    public String deleteProduto(@PathVariable int index) {
-//        if (index >= 0 && index < produtos.size()) {
-//            produtos.remove(index);
-//            return "Produto removido com sucesso!";
-//        } else {
-//            throw new IllegalArgumentException("Índice inválido");
-//        }
-//    }
+    @GetMapping("/servicos")
+    public List<Servico> getServico() {
+        return servicos;
+    }
+   
+    @PostMapping("/servicos")
+        public Servico createServico(@RequestBody Servico novoServico) {
+        servicos.add(novoServico);
+        return novoServico;
+    }
     
+   @PutMapping("/servicos/{nome}")
+    public Servico updateServico(@PathVariable String nome, @RequestBody Servico servicoAtualizado) {
+    // Buscar o servico com o nome fornecido
+    Servico servicoExistente = servicos.stream()
+                                       .filter(c -> c.getNome().equals(nome))
+                                       .findFirst()
+                                       .orElse(null);
+
+    // Verifica se o servico foi encontrado
+    if (servicoExistente != null) {
+        // Atualiza os dados do cliente
+        servicoExistente.setNome(servicoAtualizado.getNome());
+        servicoExistente.setPreco(servicoAtualizado.getPreco());
+
+        // Retorna o servico atualizado
+        return servicoExistente;
+    } else {
+        throw new IllegalArgumentException("Servico com nome " + nome + " não encontrado");
+    }
+}
+    
+    @DeleteMapping("/servicos/{nome}")
+    public String deleteServico(@PathVariable String nome) {
+    Servico servico = servicos.stream()
+                              .filter(c -> c.getNome().equals(nome))
+                              .findFirst()
+                              .orElse(null);
+
+    if (servico != null) {
+        servicos.remove(servico);
+        return "Servico removido com sucesso!";
+    } else {
+        throw new IllegalArgumentException("Servico com nomr " + nome + " não encontrado");
+    }
+}
     //----------------------------------------------------------------------------------
     // Crud Horarios (Get is in main page)
     

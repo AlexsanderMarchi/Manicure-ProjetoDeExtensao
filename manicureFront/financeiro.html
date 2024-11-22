@@ -97,61 +97,29 @@
             </h2>
         </header>
 
-        <!--financeiro-->
-        <div class="thefather">
-            <div class="child1">
-                <p>Entrada
-                    <hr>
-                <ul class="clientes">
-                    <li>
-                        <div id="nome">Amanda</div>
-                    </li>
-                    <div id="valor">R$ 100,00</div>
-                    <li>
-                        <div class="vermais">
-                            <a href="#" class="btn-vermais">Ver Mais</a>
-                        </div>
-                    </li>
-                </ul>
-                </p>
-                <hr>
-                <ul class="clientes">
-                    <li>
-                        <div id="nome">Júlia</div>
-                    </li>
-                    <div id="valor">R$ 100,00</div>
-                    <li>
-                        <div class="vermais">
-                            <a href="#" class="btn-vermais">Ver Mais</a>
-                        </div>
-                    </li>
-                </ul>
-                </p>
-                
-            </div> <!--child1-->
-
-            <div class="child1">
-                <p>Saída
-                    <hr>
-                <ul class="clientes">
-                    <li>
-                        <div id="nome">esmalte x </div>
-                    </li>
-                    <div id="valor">R$ 50,00</div>
-                </ul>
-                </p>
-                <hr>
-                <ul class="clientes">
-                    <li>
-                        <div id="nome">luvas P</div>
-                    </li>
-                    <div id="valor">R$ 40,00</div>
-                </ul>
-                </p>
-                
-            </div> <!--child1-->
-
-        </div><!--thefather-->
+        <div class="clientes">
+            <div class="card">
+                <div class="card-header">
+                    <h3 id="totalCaixa"> </h3>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Entrada</th>
+                                    <th>Serviço</th>
+                                    <th>Dia</th>
+                                    <th>Hora</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                            </tbody>
+                        </table>                                                    
+                </div>
+            </div>
+        </div>
 
         <script src="financeiro.js"></script>
 </body>
