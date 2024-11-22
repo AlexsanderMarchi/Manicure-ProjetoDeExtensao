@@ -211,12 +211,12 @@ public String deleteCliente(@PathVariable long telefone) {
 }
     //----------------------------------------------------------------------------------
     // Crud Horarios (Get is in main page)
-    
-//     @PostMapping("/agendamentos")
-//    public HoraMarcada createAgendamento(@RequestBody HoraMarcada novoAgendamento) {
-//        agendamentoGerais.add(novoAgendamento);
-//        return novoAgendamento;
-//    }
+        
+     @PostMapping("/agendamentos")
+    public HoraMarcada createAgendamento(@RequestBody HoraMarcada novoAgendamento) {
+        agendamentoGerais.add(novoAgendamento);
+        return novoAgendamento;
+    }
 //    
 //    @PutMapping("/agendamentos/{index}")
 //    public HoraMarcada updateAgendamento(@PathVariable int index, @RequestBody HoraMarcada agendamentoAtualizado) {

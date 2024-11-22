@@ -189,18 +189,48 @@
                 <h2>Adicionar Novo Agendamento</h2>
                 <form id="adicionar-form">
                   <div>
-                    <label for="nome">Nome:</label>
-                    <input
-                      type="text"
-                      id="nome"
-                      name="nome"
-                      placeholder="Digite o nome"
-                      required
-                    />
+                    <label for="nome">Cliente:</label>
+                    <select id="nome" name="nome" required>
+                      <option value="" disabled selected>
+                        Selecione um cliente
+                      </option>
+                    </select>
                   </div>
                   <div>
                     <label for="horario">Horário:</label>
                     <input type="time" id="horario" name="horario" required />
+                  </div>
+                  <div>
+                    <label for="dia">Dia:</label>
+                    <input
+                      type="number"
+                      id="dia"
+                      name="dia"
+                      placeholder="Digite o dia"
+                      min="1"
+                      max="31"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label for="mes">Mes:</label>
+                    <select id="mes" name="mes" required>
+                      <option value="" disabled selected>
+                        Selecione um mês
+                      </option>
+                      <option value="Janeiro">Janeiro</option>
+                      <option value="Fevereiro">Fevereiro</option>
+                      <option value="Março">Março</option>
+                      <option value="Abril">Abril</option>
+                      <option value="Maio">Maio</option>
+                      <option value="Junho">Junho</option>
+                      <option value="Julho">Julho</option>
+                      <option value="Agosto">Agosto</option>
+                      <option value="Setembro">Setembro</option>
+                      <option value="Outubro">Outubro</option>
+                      <option value="Novembro">Novembro</option>
+                      <option value="Dezembro">Dezembro</option>
+                    </select>
                   </div>
                   <div>
                     <label for="servico">Serviço:</label>
@@ -208,14 +238,10 @@
                       <option value="" disabled selected>
                         Selecione um serviço
                       </option>
-                      <option value="corte">Corte</option>
-                      <option value="manicure">Manicure</option>
-                      <option value="pedicure">Pedicure</option>
-                      <option value="coloração">Coloração</option>
                     </select>
                   </div>
-                  <div>
-                    <label for="profissional">Profissional:</label>
+                  <!-- <div>
+                    <label for="profissional">Serviço:</label>
                     <input
                       type="text"
                       id="profissional"
@@ -223,14 +249,13 @@
                       placeholder="Digite o nome do profissional"
                       required
                     />
-                  </div>
+                  </div> -->
                   <button type="submit">Adicionar</button>
                 </form>
               </div>
             </div>
           </div>
-          <div class="agenda">
-          </div>
+          <div class="agenda"></div>
         </div>
       </div>
     </div>

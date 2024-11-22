@@ -1,35 +1,116 @@
-document.querySelectorAll('.close').forEach(btn => {
-  btn.addEventListener('click', (event) => {
-  const modalId = event.target.getAttribute('data-modal');
-  document.getElementById(modalId).style.display = 'none';
-  });
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  const adicionarForm = document.getElementById("adicionar-form");
+  const modal = document.getElementById("adicionar-modal");
 
-
+  // Abrir modal
   document.getElementById("btn-adicionar").addEventListener("click", () => {
-  document.getElementById("adicionar-modal").style.display = "block";
+    document.getElementById("adicionar-modal").style.display = "block";
   });
 
-  document.querySelectorAll(".close").forEach(closeBtn => {
-  closeBtn.addEventListener("click", (event) => {
-  const modalId = event.target.getAttribute("data-modal");
-  document.getElementById(modalId).style.display = "none";
-  });
+  // Fechar modais
+  document.querySelectorAll(".close").forEach((closeBtn) => {
+    closeBtn.addEventListener("click", (event) => {
+      const modalId = event.target.getAttribute("data-modal");
+      document.getElementById(modalId).style.display = "none";
+    });
   });
 
+  // Fechar modal ao clicar fora
   window.addEventListener("click", (event) => {
-  if (event.target.classList.contains("modal")) {
-  event.target.style.display = "none";
-  }
+    if (event.target.classList.contains("modal")) {
+      event.target.style.display = "none";
+    }
   });
 
-function formatarTelefone(telefone) {
-  const cleaned = telefone.replace(/\D/g, '');
-  const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
-  if (match) {
-      return `${match[1]} ${match[2]}-${match[3]}`;
+ //----------------------ADICIONAR AGENDAMENTO----------------------//
+
+// Enviar dados do formulário via POST para a API
+adicionarForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  // Pegando os valores do HTML
+  const nomeCliente = document.getElementById("nome").value;
+  const hora = document.getElementById("horario").value;
+  const dia = document.getElementById("dia").value;
+  const mes = document.getElementById("mes").value;
+  const nomeServico  = document.getElementById("servico").value;
+
+  //Transformando dados 
+  const diaFormatado = `${dia} de ${mes}`;
+  const primeiroNome = nomeCliente.split(" ")[0]
+  const segundoNome = nomeCliente.split(" ")[1]
+  const clientes = await fetchClientes();
+  const servicos = await fetchServicos();
+  console.log('servicos', servicos);
+  
+  const cliente = clientes.find((c) => c.nome === primeiroNome && c.sobreNome === segundoNome);
+  console.log('cliente', cliente);
+  if (!cliente) {
+    throw new Error("Cliente não encontrado!");
   }
-  return telefone;
+  const servico = servicos.find((s) => s.nome == nomeServico);
+  if (!servico) {
+    throw new Error("Serviço não encontrado!");
+  }
+  console.log('servico', servico);
+
+  //Ajustando objeto para o fetch
+  const agendamentoData = {
+      dia: diaFormatado,
+      hora: hora,
+      cliente: {
+        nome: cliente.nome,
+        sobreNome: cliente.sobreNome,
+        telefone: cliente.telefone,
+      },
+      servico: {
+        nome: servico.nome,
+        preco: servico.preco,
+      },
+    };
+
+  console.log('agendamentoData', agendamentoData);
+
+  try {
+    // const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos',{
+    const response = await fetch("http://localhost:8080/agendamentos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(agendamentoData)
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao adicionar cliente");
+    }
+
+    const data = await response.json();
+
+    modal.style.display = "none";
+
+    await fetchAgendamentos();
+
+  } catch (error) {
+    console.error("Erro ao adicionar cliente:", error);
+  }
+});
+
+
+//----------------------BUSCAR DADOS AGENDAMENTOS----------------------//
+
+async function fetchAgendamentos() {
+  try {
+    const response = await fetch("http://localhost:8080/agendamentos");
+    // const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    populateAgenda(data);
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
 }
 
 function populateAgenda(appointments) {
@@ -55,108 +136,89 @@ function populateAgenda(appointments) {
     const dayTitle = document.createElement('h2');
     dayTitle.textContent = date.charAt(0).toUpperCase() + date.slice(1); // Capitalizar a primeira letra
     dayDiv.appendChild(dayTitle);
-      // const dayTitle = document.createElement('h2');
-      // const formattedDate = new Date(date).toLocaleDateString('pt-BR', {
-      //     weekday: 'long',
-      //     day: 'numeric',
-      //     month: 'long',
-      // });
-      // dayTitle.textContent = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-      // dayDiv.appendChild(dayTitle);
-
-      // Adicionar agendamentos
-      groupedByDay[date].forEach((appointment) => {
+    
+    // Adicionar agendamentos
+    groupedByDay[date].forEach((appointment) => {
           const appointmentDiv = document.createElement('div');
           appointmentDiv.classList.add('appointment');
-
+          
           appointmentDiv.innerHTML = `
               <p><strong>Horário:</strong> ${appointment.hora}</p>
               <p><strong>Cliente:</strong> ${appointment.cliente.nome} ${appointment.cliente.sobreNome}</p>
               <p><strong>Serviço:</strong> ${appointment.servico.nome}</p>
           `;
           dayDiv.appendChild(appointmentDiv);
-      });
-
+        });
+        
       agendaContainer.appendChild(dayDiv);
   });
 }
 
-// function populateAgenda(appointments) {
-//   const agendaContainer = document.querySelector('.agenda');
-//   agendaContainer.innerHTML = ''; // Limpa o conteúdo anterior
 
-//   // Data base: hoje
-//   const today = new Date();
-  
-//   // Gerar lista de 7 dias consecutivos
-//   const daysToRender = Array.from({ length: 5 }, (_, i) => {
-//       const date = new Date(today);
-//       date.setDate(today.getDate() + i);
-//       return date.toISOString().split('T')[0]; // Formato 'YYYY-MM-DD'
-//   });
+//----------------------BUSCAR DADOS CLIENTES----------------------//
 
-//   // Agrupar agendamentos por dia
-//   const groupedByDay = appointments.reduce((acc, appointment) => {
-//       const date = appointment.dia;
-//       if (!acc[date]) {
-//           acc[date] = [];
-//       }
-//       acc[date].push(appointment);
-//       return acc;
-//   }, {});
-
-//   // Garantir que todos os 7 dias estejam presentes no grupo
-//   daysToRender.forEach((date) => {
-//       if (!groupedByDay[date]) {
-//           groupedByDay[date] = []; // Adicionar dias sem agendamentos
-//       }
-//   });
-
-//   // Construir HTML para cada dia
-//   daysToRender.forEach((date) => {
-//       const dayDiv = document.createElement('div');
-//       dayDiv.classList.add('day');
-
-//       // Título do dia
-//       const dayTitle = document.createElement('h2');
-//       const formattedDate = new Date(date).toLocaleDateString('pt-BR', {
-//           weekday: 'long',
-//           day: 'numeric',
-//           month: 'long',
-//       });
-//       dayTitle.textContent = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
-//       dayDiv.appendChild(dayTitle);
-
-//       // Adicionar agendamentos
-//       groupedByDay[date].forEach((appointment) => {
-//           const appointmentDiv = document.createElement('div');
-//           appointmentDiv.classList.add('appointment');
-
-//           appointmentDiv.innerHTML = `
-//               <p><strong>Horário:</strong> ${appointment.hora}</p>
-//               <p><strong>Cliente:</strong> ${appointment.cliente.nome} ${appointment.cliente.sobreNome}</p>
-//               <p><strong>Serviço:</strong> ${appointment.servico}</p>
-//               <p><strong>Profissional:</strong> ${appointment.profissional}</p>
-//           `;
-//           dayDiv.appendChild(appointmentDiv);
-//       });
-
-//       agendaContainer.appendChild(dayDiv);
-//   });
-// }
-  
-  
-async function fetchAgendamentos() {
+async function fetchClientes() {
   try {
-    const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos');
+    // const response = await fetch('https://manicure-projetodeextensao.onrender.com/clientes');
+    const response = await fetch('http://localhost:8080/clientes');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    populateAgenda(data);
+    populateClientes(data);
+    return data;
   } catch (error) {
     console.error('Fetch error:', error);
   }
+}
+
+function populateClientes(servicos) {
+  const selectElement = document.getElementById("nome");
+  selectElement.innerHTML = `
+    <option value="" disabled selected>
+      Selecione um cliente
+    </option>
+  `;
+
+  servicos.forEach((servico) => {
+    const option = document.createElement("option");
+    option.value = `${servico.nome} ${servico.sobreNome}`
+    option.textContent = `${servico.nome} ${servico.sobreNome}`;
+    selectElement.appendChild(option);
+  });
+}
+
+//----------------------BUSCAR DADOS SERVIÇOS----------------------//
+
+async function fetchServicos() {
+  try {
+    const response = await fetch("http://localhost:8080/servicos");
+    // const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const servicosData = await response.json();
+    populateServicos(servicosData);
+    return servicosData;
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
+}
+
+function populateServicos(servicos) {
+  const selectElement = document.getElementById("servico");
+  selectElement.innerHTML = `
+    <option value="" disabled selected>
+      Selecione um serviço
+    </option>
+  `;
+
+  servicos.forEach((servico) => {
+    const option = document.createElement("option");
+    option.value = servico.nome;
+    option.textContent = servico.nome;
+    selectElement.appendChild(option);
+  });
 }
 
   // Função para popular a tabela
@@ -182,7 +244,20 @@ async function fetchAgendamentos() {
   //   });
   // }
 
+  //----------------------OUTRAS FUNÇÕES----------------------//
+
+  // function formatarTelefone(telefone) {
+  //   const cleaned = telefone.replace(/\D/g, '');
+  //   const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
+  //   if (match) {
+  //       return `${match[1]} ${match[2]}-${match[3]}`;
+  //   }
+  //   return telefone;
+  // }
 
   window.onload = async () => {
     await fetchAgendamentos();
-};
+    await fetchClientes();
+    await fetchServicos();
+}
+}); 
