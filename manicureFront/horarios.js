@@ -247,8 +247,8 @@ function populateClientes(servicos) {
 
 async function fetchServicos() {
   try {
-    const response = await fetch("http://localhost:8080/servicos");
-    // const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos');
+    // const response = await fetch("http://localhost:8080/servicos");
+    const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos');
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
