@@ -127,6 +127,7 @@ function populateAgenda(appointments) {
       return acc;
   }, {});
 
+  
   // Construir HTML para cada dia
   Object.keys(groupedByDay).forEach((date) => {
       const dayDiv = document.createElement('div');

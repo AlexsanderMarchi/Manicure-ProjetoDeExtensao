@@ -1,43 +1,3 @@
-// document.addEventListener("DOMContentLoaded", () => {
-//     // URL da API
-//     const apiUrl = "https://manicure-projetodeextensao.onrender.com/api/endpoint"; // Altere para o seu endpoint real
-
-//     // Função para fazer o fetch
-//     const fetchData = async () => {
-//         try {
-//             const response = await fetch(apiUrl);
-//             // Verifica se a resposta foi bem-sucedida
-//             if (!response.ok) {
-//                 throw new Error(`Erro: ${response.status}`);
-//             }
-//             const data = await response.json(); // Ou response.text() se a resposta não for JSON
-
-//             // Manipule os dados conforme necessário
-//             console.log(data);
-//             // Por exemplo, exiba os dados na página
-//             displayData(data);
-//         } catch (error) {
-//             console.error("Erro ao buscar dados:", error);
-//         }
-//     };
-
-//     // Função para exibir os dados na página
-//     const displayData = (data) => {
-//         const mainContent = document.querySelector('.main-content');
-//         const dataList = document.createElement('ul');
-
-//         data.forEach(item => {
-//             const listItem = document.createElement('li');
-//             listItem.textContent = item.name; // Altere 'name' para a propriedade desejada
-//             dataList.appendChild(listItem);
-//         });
-
-//         mainContent.appendChild(dataList);
-//     };
-
-//     // Chama a função fetchData
-//     fetchData();
-// });
 function formatarTelefone(telefone) {
   const telefoneStr = String(telefone);
   const cleaned = telefoneStr.replace(/\D/g, '');
@@ -57,27 +17,29 @@ async function fetchAgendamentos() {
       }
       const data = await response.json();
       populateTable(data);
+      console.log(data);
+      const totalEntradas = data.reduce((total, item) => total + item.servico.preco, 0); 
+      document.getElementById('totalCaixa').textContent = `R$${totalEntradas.toFixed(2)}`; 
     } catch (error) {
       console.error('Fetch error:', error);
     }
   }
 
-  async function fetchCaixa() {
-    try {
-      // const response = await fetch('http://localhost:8080/caixa');
-      const response = await fetch('https://manicure-projetodeextensao.onrender.com/caixa');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const caixa = await response.json();
-      const totalEntradas = caixa.reduce((total, item) => total + item.entrada, 0);  
-      document.getElementById('totalCaixa').textContent = `R$${totalEntradas}`; 
-       console.log('Total de Entradas:', totalEntradas);
+  // async function fetchCaixa() {
+  //   try {
+  //     // const response = await fetch('http://localhost:8080/caixa');
+  //     const response = await fetch('https://manicure-projetodeextensao.onrender.com/caixa');
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok');
+  //     }
+  //     const caixa = await response.json();
+  //     const totalEntradas = caixa.reduce((total, item) => total + item.entrada, 0);  
+  //     document.getElementById('totalCaixa').textContent = `R$${totalEntradas.toFixed(2)}`; 
       
-    } catch (error) {
-      console.error('Fetch error:', error);
-    }
-  }
+  //   } catch (error) {
+  //     console.error('Fetch error:', error);
+  //   }
+  // }
 
 
   async function fetchTotalServicos() {
@@ -145,7 +107,7 @@ async function fetchAgendamentos() {
 
   window.onload = async () => {
     await fetchAgendamentos();
-    await fetchCaixa();
+    // await fetchCaixa();
     await fetchTotalServicos();
     await fetchTotalClientes();
     await fetchTotalAgendamentos();
