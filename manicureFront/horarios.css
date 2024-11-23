@@ -20,6 +20,13 @@
   width: 80vw;
 }
 
+.button-row-direction {
+  display: flex;
+  flex-direction: row;
+  margin: 2rem 0.5rem 0.5rem 0.5rem;
+  gap: 2rem;
+}
+
 .sidebar-menu a.tab-buttons {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -384,6 +391,27 @@ body {
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   margin-bottom: 10px;
+  position: relative;
+}
+.delete-icon {
+  /* opacity: 0; */
+  visibility: hidden;
+  font-size: 4.2em;
+  color: #d9534f;
+  position: absolute;
+  left: 35%;
+  top: 10%;
+  /* transition: opacity 0.3s ease; */
+}
+
+.appointment:hover {
+  opacity: 70%;
+  cursor: pointer;
+}
+
+.appointment:hover .delete-icon {
+  visibility: visible;
+  opacity: 100%;
 }
 
 .appointment p {

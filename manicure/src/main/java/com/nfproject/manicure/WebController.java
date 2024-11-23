@@ -195,18 +195,19 @@ public String deleteCliente(@PathVariable long telefone) {
     }
 }
     
-    @DeleteMapping("/servicos/{nome}")
-    public String deleteServico(@PathVariable String nome) {
-    Servico servico = servicos.stream()
-                              .filter(c -> c.getNome().equals(nome))
+    @DeleteMapping("/agendamentos/{dia}/{hora}")
+    public String deleteAgendamento(@PathVariable String dia, @PathVariable String hora) {
+    HoraMarcada agendamento = agendamentoGerais.stream()
+                              .filter(c -> c.getDia().equals(dia))
+                              .filter(c -> c.getHora().equals(hora))
                               .findFirst()
                               .orElse(null);
 
-    if (servico != null) {
-        servicos.remove(servico);
+    if (agendamento != null) {
+        agendamentoGerais.remove(agendamento);
         return "Servico removido com sucesso!";
     } else {
-        throw new IllegalArgumentException("Servico com nomr " + nome + " não encontrado");
+        throw new IllegalArgumentException("Agendamento não encontrado");
     }
 }
     //----------------------------------------------------------------------------------

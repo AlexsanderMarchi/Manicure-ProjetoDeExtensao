@@ -98,7 +98,6 @@ async function fetchAgendamentos() {
         <td>${service.dia} às ${service.hora}</td>
         <td>${formatarTelefone(service.cliente.telefone)}</td>
         <td>${service.servico.nome} </td>
-        <td>R$${service.servico.preco}</td>
       `;
 
       tableBody.appendChild(row);
