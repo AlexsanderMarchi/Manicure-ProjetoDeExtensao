@@ -120,6 +120,31 @@ function populateAgenda(appointments) {
   const agendaContainer = document.querySelector('.agenda');
   agendaContainer.innerHTML = ''; // Limpa o conteúdo anterior
 
+  const monthMap = {
+    Janeiro: 0,
+    Fevereiro: 1,
+    Março: 2,
+    Abril: 3,
+    Maio: 4,
+    Junho: 5,
+    Julho: 6,
+    Agosto: 7,
+    Setembro: 8,
+    Outubro: 9,
+    Novembro: 10,
+    Dezembro: 11
+  };
+
+  function parseDate(dateStr) {
+    const [day, , month] = dateStr.split(' '); // Divide em ["12", "de", "Novembro"]
+    return new Date(new Date().getFullYear(), monthMap[month], parseInt(day, 10));
+  }
+
+  // function parseTime(timeStr) {
+  //   const [hours, minutes] = timeStr.split(':').map(Number); // Divide em ["10", "10"] e converte para números
+  //   return hours * 60 + minutes; // Converte o horário em minutos totais para facilitar a comparação
+  // }
+
   // Agrupar por dia
   const groupedByDay = appointments.reduce((acc, appointment) => {
       const date = appointment.dia;
@@ -131,13 +156,10 @@ function populateAgenda(appointments) {
   }, {});
 
    // Ordenar as datas (como strings, isso vai ordenar de forma crescente)
-   const sortedDates = Object.keys(groupedByDay).sort();
-
-   // Limitar a 5 primeiros dias
-   const limitedDates = sortedDates.slice(0, 5);
+    const sortedDates = Object.keys(groupedByDay).sort((a, b) => parseDate(a) - parseDate(b));
 
   // Construir HTML para cada dia
-  limitedDates.forEach((date) => {
+  sortedDates.forEach((date) => {
     const dayDiv = document.createElement('div');
     dayDiv.classList.add('day');
       // Título do dia
@@ -145,15 +167,17 @@ function populateAgenda(appointments) {
     dayTitle.textContent = date.charAt(0).toUpperCase() + date.slice(1); // Capitalizar a primeira letra
     dayDiv.appendChild(dayTitle);
     
+    // const sortedAppointments = groupedByDay[date].sort((a, b) => parseTime(a.hora) - parseTime(b.hora));
+    
     // Adicionar agendamentos
     groupedByDay[date].forEach((appointment) => {
           const appointmentDiv = document.createElement('div');
           appointmentDiv.classList.add('appointment');
           
           appointmentDiv.innerHTML = `
-            <p class="delete-btn" data-id='${appointment.id_horamarcada}'><strong class="delete-btn">Horário:</strong> ${appointment.hora}</p>
-            <p class="delete-btn" data-id='${appointment.id_horamarcada}'><strong class="delete-btn">Cliente:</strong> ${appointment.cliente.nome} ${appointment.cliente.sobreNome}</p>
-            <p class="delete-btn" data-id='${appointment.id_horamarcada}'><strong class="delete-btn">Serviço:</strong> ${appointment.servico.nome}</p>
+            <p><strong class="delete-btn">Horário:</strong> ${appointment.hora}</p>
+            <p><strong class="delete-btn">Cliente:</strong> ${appointment.cliente.nome} ${appointment.cliente.sobreNome}</p>
+            <p><strong class="delete-btn">Serviço:</strong> ${appointment.servico.nome}</p>
             <span class="delete-icon" data-id='${appointment.id_horamarcada}' title="Remover"><i class="fas fa-trash-alt"></i></span>
           `;
           dayDiv.appendChild(appointmentDiv);
@@ -184,7 +208,7 @@ function populateAgenda(appointments) {
   }
     // Modal de exclusão
     document.addEventListener("click", async (event) => {
-      if (event.target.classList.contains("delete-btn") || event.target.classList.contains("delete-icon")) {
+      if (event.target.classList.contains("delete-icon")) {
         const row = event.target.closest(".appointment");
         const dataId = event.target.getAttribute("data-id");
   
