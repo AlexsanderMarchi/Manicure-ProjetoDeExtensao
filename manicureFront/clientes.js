@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
-      const response = await fetch('https://manicure-projetodeextensao.onrender.com/clientes',{
+      const response = await fetch('https://manicure-projetodeextensao.onrender.com/clientes', {
       // const response = await fetch("http://localhost:8080/clientes", {
         method: "POST",
         headers: {
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Função para editar um cliente
 function editarCliente(cliente) {
-  clienteIdEditando = cliente.telefone;
+  clienteIdEditando = cliente.id;
   document.getElementById("nomeEditado").value = cliente.nome;
   document.getElementById("sobreNomeEditado").value = cliente.sobreNome;
   document.getElementById("telefoneEditado").value = cliente.telefone;
@@ -220,11 +220,10 @@ function editarCliente(cliente) {
   
       row.innerHTML = `
         <td>${service.nome} ${service.sobreNome}</td>
-        <td>${formatarTelefone(service.telefone)}</td>
-        <td>${service?.email ? service.email : "--"}
+        <td>${formatarTelefone(service.telefone)}
           <span class="actions">
-              <button class="edit-btn" data-id="${service.telefone}">✏️</button>
-              <button class="delete-btn" data-id='${service.telefone}'>🗑️</button>
+              <button class="edit-btn" data-id="${service.id}">✏️</button>
+              <button class="delete-btn" data-id='${service.id}'>🗑️</button>
           </span>
         </td>
       `;

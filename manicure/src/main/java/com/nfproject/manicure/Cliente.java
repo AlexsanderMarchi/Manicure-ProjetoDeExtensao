@@ -3,16 +3,26 @@ package com.nfproject.manicure;
 
 
 public class Cliente {
+    
+    private long id;
     private String nome;
     private String sobreNome;
     private long telefone;
 
-    public Cliente (String nome, String sobreNome, long telefone){
+    public Cliente (long id, String nome, String sobreNome, long telefone){
+        setId(id);
         setNome(nome);
         setSobreNome(sobreNome);
         setTelefone(telefone);
     }
     
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
     
     public String getNome() {
         return nome;
@@ -52,5 +62,5 @@ public class Cliente {
         
         return clientesFormatados;
     }
-    
+      
 }
