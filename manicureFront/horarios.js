@@ -66,7 +66,7 @@ adicionarForm.addEventListener("submit", async (event) => {
         telefone: cliente.telefone,
       },
       servico: {
-        id: cliente.id,
+        id: servico.id,
         nome: servico.nome,
         preco: servico.preco,
       },
