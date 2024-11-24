@@ -2,13 +2,25 @@ package com.nfproject.manicure;
 
 
 public class Servico {
+    
+    private long id;
     private String nome;
     private double preco;
 
-    public Servico (String nome, double preco){
+    public Servico (long id, String nome, double preco){
+        setId(id);
         setNome(nome);
         setPreco(preco);
     }
+    
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    
     
     public String getNome() {
         return nome;

@@ -29,26 +29,27 @@ adicionarForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   // Pegando os valores do HTML
-  const nomeCliente = document.getElementById("nome").value;
+  const idCliente = parseInt(document.getElementById("nome").value, 10);
+  console.log('idCliente', idCliente);
   const hora = document.getElementById("horario").value;
   const dia = document.getElementById("dia").value;
   const mes = document.getElementById("mes").value;
-  const nomeServico  = document.getElementById("servico").value;
+  const idServico  = parseInt(document.getElementById("servico").value, 10);
+  console.log('idServico', idServico);
 
   //Transformando dados 
   const diaFormatado = `${dia} de ${mes}`;
-  const primeiroNome = nomeCliente.split(" ")[0]
-  const segundoNome = nomeCliente.split(" ")[1]
   const clientes = await fetchClientes();
   const servicos = await fetchServicos();
-  console.log('servicos', servicos);
+  console.log('clientesFetch', clientes);
+  console.log('servicosFetch', servicos);
   
-  const cliente = clientes.find((c) => c.nome === primeiroNome && c.sobreNome === segundoNome);
+  const cliente = clientes.find((c) => c.id === idCliente);
   console.log('cliente', cliente);
   if (!cliente) {
     throw new Error("Cliente não encontrado!");
   }
-  const servico = servicos.find((s) => s.nome == nomeServico);
+  const servico = servicos.find((s) => s.id === idServico);
   if (!servico) {
     throw new Error("Serviço não encontrado!");
   }
@@ -59,11 +60,13 @@ adicionarForm.addEventListener("submit", async (event) => {
       dia: diaFormatado,
       hora: hora,
       cliente: {
+        id: cliente.id,
         nome: cliente.nome,
         sobreNome: cliente.sobreNome,
         telefone: cliente.telefone,
       },
       servico: {
+        id: cliente.id,
         nome: servico.nome,
         preco: servico.preco,
       },
@@ -148,10 +151,10 @@ function populateAgenda(appointments) {
           appointmentDiv.classList.add('appointment');
           
           appointmentDiv.innerHTML = `
-            <p class="delete-btn" data-id='${appointment.dia}&${appointment.hora}'><strong class="delete-btn">Horário:</strong> ${appointment.hora}</p>
-            <p class="delete-btn" data-id='${appointment.dia}&${appointment.hora}'><strong class="delete-btn">Cliente:</strong> ${appointment.cliente.nome} ${appointment.cliente.sobreNome}</p>
-            <p class="delete-btn" data-id='${appointment.dia}&${appointment.hora}'><strong class="delete-btn">Serviço:</strong> ${appointment.servico.nome}</p>
-            <span class="delete-icon" data-id='${appointment.dia}&${appointment.hora}' title="Remover"><i class="fas fa-trash-alt"></i></span>
+            <p class="delete-btn" data-id='${appointment.id_horamarcada}'><strong class="delete-btn">Horário:</strong> ${appointment.hora}</p>
+            <p class="delete-btn" data-id='${appointment.id_horamarcada}'><strong class="delete-btn">Cliente:</strong> ${appointment.cliente.nome} ${appointment.cliente.sobreNome}</p>
+            <p class="delete-btn" data-id='${appointment.id_horamarcada}'><strong class="delete-btn">Serviço:</strong> ${appointment.servico.nome}</p>
+            <span class="delete-icon" data-id='${appointment.id_horamarcada}' title="Remover"><i class="fas fa-trash-alt"></i></span>
           `;
           dayDiv.appendChild(appointmentDiv);
         });
@@ -163,18 +166,18 @@ function populateAgenda(appointments) {
 //----------------------EXCLUIR AGENDAMENTO----------------------//
 
   //Fetch com método Delete para apagar um cliente especifico
-  async function deleteAgendamento(dia, hora, row) {
+  async function deleteAgendamento(id_horamarcadaDelete, row) {
     try {
-      const response = await fetch(`https://manicure-projetodeextensao.onrender.com/agendamentos/${encodeURIComponent(dia)}/${encodeURIComponent(hora)}`, {
-      // const response = await fetch(`http://localhost:8080/agendamentos/${encodeURIComponent(dia)}/${encodeURIComponent(hora)}`, {
+      const response = await fetch(`https://manicure-projetodeextensao.onrender.com/agendamentos/${id_horamarcadaDelete}`, {
+      // const response = await fetch(`http://localhost:8080/agendamentos/${id_horamarcadaDelete}`, {
         method: "DELETE",
       });
   
       if (!response.ok) {
         throw new Error("Erro ao excluir cliente");
       }
-      row.remove();
       await fetchAgendamentos();
+      row.remove();
     } catch (error) {
       console.error("Erro na requisição DELETE:", error);
     }
@@ -237,7 +240,7 @@ function populateClientes(servicos) {
 
   servicos.forEach((servico) => {
     const option = document.createElement("option");
-    option.value = `${servico.nome} ${servico.sobreNome}`
+    option.value = `${servico.id}`
     option.textContent = `${servico.nome} ${servico.sobreNome}`;
     selectElement.appendChild(option);
   });
@@ -270,45 +273,11 @@ function populateServicos(servicos) {
 
   servicos.forEach((servico) => {
     const option = document.createElement("option");
-    option.value = servico.nome;
+    option.value = servico.id;
     option.textContent = servico.nome;
     selectElement.appendChild(option);
   });
 }
-
-  // Função para popular a tabela
-  // function populateTable(services) {
-  //   const tableBody = document.getElementById("tableBody"); // Obtém o corpo da tabela
-  //   tableBody.innerHTML = ''; // Limpa o conteúdo da tabela antes de adicionar novas linhas
-  
-  //   services.forEach(service => {
-  //     const row = document.createElement("tr"); // Cria uma nova linha
-  
-  //     row.innerHTML = `
-  //       <td>${service.nome} ${service.sobreNome}</td>
-  //       <td>${formatarTelefone(service.telefone)}</td>
-  //       <td>${service?.email ? service.email : "--"}
-  //         <span class="actions">
-  //             <button class="edit-btn">✏️</button>
-  //             <button class="delete-btn">🗑️</button>
-  //         </span>
-  //       </td>
-  //     `;
-  
-  //     tableBody.appendChild(row); // Adiciona a linha à tabela
-  //   });
-  // }
-
-  //----------------------OUTRAS FUNÇÕES----------------------//
-
-  // function formatarTelefone(telefone) {
-  //   const cleaned = telefone.replace(/\D/g, '');
-  //   const match = cleaned.match(/^(\d{2})(\d{5})(\d{4})$/);
-  //   if (match) {
-  //       return `${match[1]} ${match[2]}-${match[3]}`;
-  //   }
-  //   return telefone;
-  // }
 
   window.onload = async () => {
     await fetchAgendamentos();

@@ -19,26 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class WebController {
     
     private final List<HoraMarcada> agendamentoGerais = new ArrayList<>();
-    private final List<Servico> servicos = new ArrayList<>();
-    
-    //----------------------------------------------------------------------------------
-    //Pagina Inicial
-    
-    @GetMapping("/agendamentos")
-    public List<HoraMarcada> getAgendamentos() {
-        return agendamentoGerais;
-    }
-    
-    @GetMapping("/agendamentos/total")
-    public int getTotalAgendamentos() {
-        return agendamentoGerais.size();
-    }
-    
-    @GetMapping("/servicos/total")
-    public int getTotalServicos() {
-           return servicos.size();
-    }
-    
     
     //----------------------------------------------------------------------------------
     //Crud Clientes
@@ -85,79 +65,74 @@ public class WebController {
     //----------------------------------------------------------------------------------
     //Crud Servicos
     
+    @Autowired
+    private ServicoRepository servicoRepository;
+    
     @GetMapping("/servicos")
     public List<Servico> getServico() {
-        return servicos;
+        return servicoRepository.listarServicos();
     }
    
+    @GetMapping("/servicos/total")
+    public int getTotalServicos() {
+           return servicoRepository.contarServicos();
+    }
+    
     @PostMapping("/servicos")
-        public Servico createServico(@RequestBody Servico novoServico) {
-        servicos.add(novoServico);
+    public Servico createServico(@RequestBody Servico novoServico) {
+        servicoRepository.inserirServico(novoServico);
         return novoServico;
     }
     
-   @PutMapping("/servicos/{nome}")
-    public Servico updateServico(@PathVariable String nome, @RequestBody Servico servicoAtualizado) {
-    // Buscar o servico com o nome fornecido
-    Servico servicoExistente = servicos.stream()
-                                       .filter(c -> c.getNome().equals(nome))
-                                       .findFirst()
-                                       .orElse(null);
-
-    // Verifica se o servico foi encontrado
-    if (servicoExistente != null) {
-        // Atualiza os dados do cliente
-        servicoExistente.setNome(servicoAtualizado.getNome());
-        servicoExistente.setPreco(servicoAtualizado.getPreco());
-
-        // Retorna o servico atualizado
-        return servicoExistente;
-    } else {
-        throw new IllegalArgumentException("Servico com nome " + nome + " não encontrado");
+    @PutMapping("/servicos/{id}")
+    public Servico updateServico(@PathVariable long id, @RequestBody Servico servicoAtualizado) {
+        if (servicoRepository.servicoExiste(id)) {
+            servicoRepository.atualizarServico(id, servicoAtualizado);
+            return servicoAtualizado;
+        } else {
+            throw new IllegalArgumentException("Servico com ID " + id + " não encontrado");
+        }
     }
-}
     
-    @DeleteMapping("/agendamentos/{dia}/{hora}")
-    public String deleteAgendamento(@PathVariable String dia, @PathVariable String hora) {
-    HoraMarcada agendamento = agendamentoGerais.stream()
-                              .filter(c -> c.getDia().equals(dia))
-                              .filter(c -> c.getHora().equals(hora))
-                              .findFirst()
-                              .orElse(null);
-
-    if (agendamento != null) {
-        agendamentoGerais.remove(agendamento);
-        return "Servico removido com sucesso!";
-    } else {
-        throw new IllegalArgumentException("Agendamento não encontrado");
+     @DeleteMapping("/servicos/{id}")
+    public String deleteServico(@PathVariable long id) {
+        try {
+            servicoRepository.deletarServicoPorId(id);
+            return "Servico com ID " + id + " removido com sucesso!";
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Erro ao remover servico com ID " + id + ": " + e.getMessage());
+        }
     }
-}
+    
     //----------------------------------------------------------------------------------
-    // Crud Horarios (Get is in main page)
-        
+    // Crud Horarios
+     
+    @Autowired
+    private HoraMarcadaRepository horaMarcadaRepository;
+            
+    @GetMapping("/agendamentos")
+    public List<HoraMarcada> getAgendamentos() {
+        return horaMarcadaRepository.listarAgendamentos();
+    }
+    
+    @GetMapping("/agendamentos/total")
+    public int getTotalAgendamentos() {
+        return horaMarcadaRepository.contarAgendamentos();
+    }
+    
      @PostMapping("/agendamentos")
     public HoraMarcada createAgendamento(@RequestBody HoraMarcada novoAgendamento) {
-        agendamentoGerais.add(novoAgendamento);
+        horaMarcadaRepository.inserirHoraMarcada(novoAgendamento);
         return novoAgendamento;
     }
-//    
-//    @PutMapping("/agendamentos/{index}")
-//    public HoraMarcada updateAgendamento(@PathVariable int index, @RequestBody HoraMarcada agendamentoAtualizado) {
-//        if (index >= 0 && index < agendamentoGerais.size()) {
-//            agendamentoGerais.set(index, agendamentoAtualizado);
-//            return agendamentoAtualizado;
-//        } else {
-//            throw new IllegalArgumentException("Índice inválido");
-//        }
-//    }
-//
-//    @DeleteMapping("/agendamentos/{index}")
-//    public String deleteAgendamento(@PathVariable int index) {
-//        if (index >= 0 && index < agendamentoGerais.size()) {
-//            agendamentoGerais.remove(index);
-//            return "Agendamento removido com sucesso!";
-//        } else {
-//            throw new IllegalArgumentException("Índice inválido");
-//        }
-//    }
+      
+    @DeleteMapping("/agendamentos/{id_horamarcada}")
+    public String deleteAgendamento(@PathVariable long id_horamarcada) {
+    try {
+            horaMarcadaRepository.deletarAgendamentoPorId(id_horamarcada);
+            return "Agendamento com ID " + id_horamarcada + " removido com sucesso!";
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Erro ao remover agendamento com ID " + id_horamarcada + ": " + e.getMessage());
+        }
+    }   
 }

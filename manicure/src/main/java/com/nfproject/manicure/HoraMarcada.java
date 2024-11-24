@@ -3,18 +3,27 @@ package com.nfproject.manicure;
 
 
 public class HoraMarcada {
-     private String dia;
+    private long id_horamarcada;
+    private String dia;
     private String hora;
     private Cliente cliente;
     private Servico servico;
 
-     public HoraMarcada (String dia, String hora, Cliente cliente, Servico servico){
+     public HoraMarcada (long id_horamarcada, String dia, String hora, Cliente cliente, Servico servico){
+        setId_horamarcada(id_horamarcada);
         setDia(dia);
         setHora(hora);
         setCliente(cliente);
         setServico(servico);
     }
     
+      public long getId_horamarcada() {
+        return id_horamarcada;
+    }
+
+    public void setId_horamarcada(long id_horamarcada) {
+        this.id_horamarcada = id_horamarcada;
+    }
     
     public String getDia() {
         return dia;
