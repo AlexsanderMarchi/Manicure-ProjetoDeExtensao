@@ -140,6 +140,7 @@ function populateAgenda(appointments) {
     return new Date(new Date().getFullYear(), monthMap[month], parseInt(day, 10));
   }
 
+  //Function dor horarios dentro do dia
   // function parseTime(timeStr) {
   //   const [hours, minutes] = timeStr.split(':').map(Number); // Divide em ["10", "10"] e converte para números
   //   return hours * 60 + minutes; // Converte o horário em minutos totais para facilitar a comparação
