@@ -75,7 +75,7 @@ adicionarForm.addEventListener("submit", async (event) => {
   console.log('agendamentoData', agendamentoData);
 
   try {
-    const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos',{
+    const response = await fetch('https://manicure-projetodeextensao.onrender.com/agendamentos', {
     // const response = await fetch("http://localhost:8080/agendamentos", {
       method: "POST",
       headers: {
