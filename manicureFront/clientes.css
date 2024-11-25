@@ -52,11 +52,17 @@
   height: 90px;
   padding: 1rem 0rem 1rem 2rem;
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
 }
 
 .sidebar-brand span {
   display: inline-block;
   padding-right: 1rem;
+}
+.sidebar-brand p {
+  align-self: center;
 }
 
 .sidebar-menu li {
